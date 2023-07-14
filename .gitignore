@@ -64,7 +64,7 @@ ehthumbs.db
 *.user
 *.masterSolution
 *.lock.json
-*.meta
+# *.meta
 
 
 # ===================================== #
