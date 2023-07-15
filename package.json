@@ -4,5 +4,20 @@
   "displayName": "AnimationPro",
   "description": "This is a UI and other animation system",
   "unity": "2021.3",
-  "unityRelease": "23f1"
+  "unityRelease": "23f1",
+  "keywords": [
+    "unity",
+    "animation",
+    "ui"
+  ],
+  "author": {
+    "name": "Matuyuhi",
+    "email": "bird9.yuhi@gmail.com",
+    "url": "https://github.com/Matuyuhi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Matuyuhi/AnimationPro.git"
+  },
+  "license": "MIT",
 }
