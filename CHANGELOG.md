@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+---
+
+## [0.1.4]
+
 ### Changed
 - package.jsonに詳細情報を追加
+- ChangeLogを調整
 
 
 ## [0.1.3] - 2023-07-15
@@ -59,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Fixed security issue 1
 
-[Unreleased]: https://github.com/Matuyuhi/AnimationPro/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/Matuyuhi/AnimationPro/compare/v0.1.4...HEAD
 [0.1.0]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1
 [0.1.3]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1.3
+[0.1.4]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1.4
