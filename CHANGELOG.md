@@ -48,4 +48,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - N/A
 
 [Unreleased]: https://github.com/Matuyuhi/AnimationPro/compare/v0.1...HEAD
-[1.0.0]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1
+[0.1.0]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1
