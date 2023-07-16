@@ -7,11 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+
+---
+## [0.5.1]
+
+### Added
+- READMEの日本語版追加
+
 ### Changed
 - コード整形
-- README整形
----
 
+### Fixed
+- FadeOutができない問題を修正
+---
 ## [0.5.0]
 
 ### Changed
@@ -25,12 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - package.jsonに詳細情報を追加
 - ChangeLogを調整
 
-
+---
 ## [0.1.3] - 2023-07-15
 
 ### Changed
 - github上でリリース作成時に自動でnpmのアップロードする
-
+---
 ## [0.1.0] - 2023-07-15
 
 ### Added
@@ -79,3 +88,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.3]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1.3
 [0.1.4]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1.4
 [0.5.0]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.5.0
+[0.5.1]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.5.1

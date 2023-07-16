@@ -11,6 +11,11 @@ namespace AnimationPro.RunTime
         {
             this.isIn = isIn;
         }
+        
+        public override TransitionSpec OnInitialized()
+        {
+            return new TransitionSpec(alpha: isIn ? 0f : 1f);
+        }
 
         public override TransitionSpec OnUpdate(float frame)
         {

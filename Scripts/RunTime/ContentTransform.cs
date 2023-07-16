@@ -18,6 +18,8 @@ namespace AnimationPro.RunTime
         }
 
         public abstract TransitionSpec OnUpdate(float frame);
+
+        public abstract TransitionSpec OnInitialized();
         
         public static ContentTransform operator +(ContentTransform a, ContentTransform b)
         {

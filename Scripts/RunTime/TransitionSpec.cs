@@ -5,21 +5,19 @@ namespace AnimationPro.RunTime
 {
     public class TransitionSpec
     {
-        public Quaternion rotate;
-        public Vector3 position;
-        public float alpha;
+        public Quaternion? rotate = null;
+        public Vector3? position = null;
+        public float? alpha = null;
         public TransitionSpec(
-            Quaternion rotate = new(), 
-            Vector3 position = new(),
-            float alpha = 0.0f
+            Quaternion? rotate = null, 
+            Vector3? position = null,
+            float? alpha = null
         )
         {
             this.position = position;
             this.rotate = rotate;
             this.alpha = alpha;
         }
-
-        
     }
     
     internal static class TransitionSpecExtensions

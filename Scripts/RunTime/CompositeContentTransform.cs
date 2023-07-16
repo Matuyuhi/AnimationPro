@@ -22,6 +22,17 @@ namespace AnimationPro.RunTime
             }
         }
 
+        public override TransitionSpec OnInitialized()
+        {
+            TransitionSpec result = new TransitionSpec();
+            foreach (ContentTransform animation in animations)
+            {
+                result = result.CombineWith(animation.OnInitialized());
+            }
+            Debug.Log(result.alpha);
+            return result;
+        }
+
         public override TransitionSpec OnUpdate(float frame)
         {
             TransitionSpec result = new TransitionSpec();
@@ -29,6 +40,7 @@ namespace AnimationPro.RunTime
             {
                 result = result.CombineWith(animation.OnUpdate(frame));
             }
+            
             return result;
         }
     

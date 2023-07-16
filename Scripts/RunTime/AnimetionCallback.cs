@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AnimationPro.RunTime
 {
-    internal interface IAnimationListener
+    public interface IAnimationListener
     {
         void OnStart();
         void OnCancel();

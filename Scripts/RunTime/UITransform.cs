@@ -1,24 +1,16 @@
 using System;
 using UnityEngine;
-using System.Collections;
-using JetBrains.Annotations;
 using UnityEngine.UI;
 
 namespace AnimationPro.RunTime
 {
     [AddComponentMenu("AnimationPro/UI/UITransform"),
     RequireComponent(typeof(RectTransform))]
-    public class UITransform : MonoBehaviour
+    public class UITransform : AnimationCore
     {
         private RectTransform rectTransform;
         private Graphic[] graphics;
 
-        [CanBeNull] private IAnimationListener listener;
-        
-        private float[] initAlpha;
-        private Vector3 initPos;
-        private Quaternion initQuaternion;
-        private bool initialized = false;
 
         private void Awake()
         {
@@ -27,47 +19,20 @@ namespace AnimationPro.RunTime
             graphics = GetComponentsInChildren<Graphic>();
             initAlpha = new float[graphics.Length];
         }
-
-        public void Animation(
-            ContentTransform a, 
-            [CanBeNull] AnimationListener animationListener = null
-        )
-        {
-            listener = animationListener ?? null;
-            InitializeParam();
-            StartCoroutine(MoveToCoroutine(a));
-        }
-
-        private IEnumerator MoveToCoroutine(ContentTransform a)
-        {
-            float time = 0f;
-            listener?.OnStart();
-
-            while (time < a.maxDuration)
-            {
-                time += Time.deltaTime;
-                var update = a.OnUpdate(time);
-                SetAlpha(update.alpha);
-                SetRotate(update.rotate);
-                SetPosition(update.position);
-                yield return null;
-            }
-            
-            RevertInitializeParam();
-            listener?.OnFinished();
-        }
-
-        private void SetAlpha(float a)
+        protected override void UpdateAlpha(float a)
         {
             foreach (var graphic in graphics)
             {
                 var color = graphic.color;
                 color.a += a;
-                graphic.color = color;
+                if (color.a <= 1.0f && color.a >= 0.0f)
+                {
+                    graphic.color = color;
+                }
             }
         }
 
-        private void InitializeParam()
+        protected override void InitializeParam()
         {
             if (initialized) throw new Exception();
 
@@ -83,7 +48,7 @@ namespace AnimationPro.RunTime
             initialized = true;
         }
 
-        private void RevertInitializeParam()
+        protected override void RevertInitializeParam()
         {
             if (!initialized) throw new Exception();
 
@@ -100,14 +65,38 @@ namespace AnimationPro.RunTime
             initialized = false;
         }
 
-        private void SetPosition(Vector3 pos)
+        protected override void UpdatePosition(Vector3 pos)
         {
             rectTransform.localPosition += pos;
         }
 
-        private void SetRotate(Quaternion rot)
+        protected override void UpdateRotate(Quaternion rot)
         {
             rectTransform.Rotate(rot.x, rot.y, rot.z);
+        }
+
+        protected override void SetParam(TransitionSpec a)
+        {
+            if (a.alpha.HasValue)
+            {
+                foreach (var graphic in graphics)
+                {
+                    var color = graphic.color;
+                    color.a = a.alpha.Value;
+                    graphic.color = color;
+                }
+            }
+
+            if (a.position.HasValue)
+            {
+                rectTransform.localPosition = a.position.Value;
+            }
+
+            if (a.rotate.HasValue)
+            {
+                var rot = a.rotate.Value;
+                rectTransform.Rotate(rot.x, rot.y, rot.z);
+            }
         }
 
         public Rect GetRect()

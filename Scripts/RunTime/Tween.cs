@@ -4,73 +4,73 @@ using UnityEngine;
 
 namespace AnimationPro.RunTime
 {
-    public static class AP
+    internal static class Tween
     {
-        public static ContentTransform FadeIn(
+        private static readonly AnimationSpec defalutSpec = new(2f, 0f);
+        public static ContentTransform Fade(AnimationSpec a, bool isIn)
+        {
+            a ??= defalutSpec;
+            return new FadeImpl(a, isIn);
+        }
+
+        public static ContentTransform SlideIn(
             this UITransform origin,
-            AnimationSpec a = null
+            AnimationSpec a, 
+            Vector3 distance
         )
         {
-            a ??= new AnimationSpec(3f, 0f);
-            return new FadeImpl(a, true);
+            a ??= defalutSpec;
+            return new SlideImpl(a, origin.GetLocalPosition() - distance, distance);
         }
-        
-        public static ContentTransform FadeOut(
+
+        public static ContentTransform SlideOut(
             this UITransform origin,
-            AnimationSpec a = null
+            AnimationSpec a, 
+            Vector3 distance
         )
         {
-            a ??= new AnimationSpec(3f, 0f);
-            return new FadeImpl(a, false);
-        }
-
-        public enum SlideDirection
-        {
-            Up,
-            Down,
-            Left,
-            Right
-        }
-
-        public enum DirectionVertical
-        {
-            Up,
-            Down,
-        }
-
-        public enum DirectionHorizontal
-        {
-            Left,
-            Right
+            a ??= defalutSpec;
+            return new SlideImpl(a, distance);
         }
         
-        public static ContentTransform SlideHorizontal(this UITransform origin, AnimationSpec a = null, DirectionHorizontal direction = DirectionHorizontal.Right)
+        public static ContentTransform SlideHorizontal(
+            this UITransform origin, 
+            bool isIn,
+            AnimationSpec a = null, 
+            AnimationAPI.DirectionHorizontal direction = AnimationAPI.DirectionHorizontal.Right
+        )
         {
             var (canvasRectTransform, canvasCenterPosInCanvas) = origin.GetCommonSlideParts();
             float distance = 0;
 
             switch (direction)
             {
-                case DirectionHorizontal.Right:
+                case AnimationAPI.DirectionHorizontal.Right:
                     distance = canvasRectTransform.rect.width - (canvasCenterPosInCanvas.x - origin.GetRect().width / 2);
                     break;
 
-                case DirectionHorizontal.Left:
+                case AnimationAPI.DirectionHorizontal.Left:
                     distance = -(canvasCenterPosInCanvas.x + origin.GetRect().width / 2);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
 
-            a ??= new AnimationSpec(1f, 0f);
+            a ??= defalutSpec;
             Vector3 targetPosition = new Vector3(distance, 0, 0);
+            if (isIn)
+            {
+                var pos = origin.GetLocalPosition();
+                return new SlideImpl(a, -targetPosition, new Vector3(distance, pos.y, pos.z));
+            }
             return new SlideImpl(a, targetPosition);
         }
 
         public static ContentTransform SlideVertical(
             this UITransform origin, 
+            bool isIn,
             AnimationSpec a = null,
-            DirectionVertical direction = DirectionVertical.Up
+            AnimationAPI.DirectionVertical direction = AnimationAPI.DirectionVertical.Up
         )
         {
             var (canvasRectTransform, canvasCenterPosInCanvas) = origin.GetCommonSlideParts();
@@ -78,19 +78,24 @@ namespace AnimationPro.RunTime
 
             switch (direction)
             {
-                case DirectionVertical.Up:
+                case AnimationAPI.DirectionVertical.Up:
                     distance = canvasRectTransform.rect.height - (canvasCenterPosInCanvas.y - origin.GetRect().height / 2);
                     break;
 
-                case DirectionVertical.Down:
+                case AnimationAPI.DirectionVertical.Down:
                     distance = -(canvasCenterPosInCanvas.y + origin.GetRect().height / 2);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
 
-            a ??= new AnimationSpec(1f, 0f);
+            a ??= defalutSpec;
             Vector3 targetPosition = new Vector3(0, distance, 0);
+            if (isIn)
+            {
+                var pos = origin.GetLocalPosition();
+                return new SlideImpl(a, -targetPosition, new Vector3(pos.x, distance, pos.z));
+            }
             return new SlideImpl(a, targetPosition);
         }
         
@@ -109,17 +114,6 @@ namespace AnimationPro.RunTime
             );
 
             return (canvasRectTransform, canvasCenterPosInCanvas);
-        }
-        
-        
-        public static ContentTransform SlideHorizontal(
-            this UITransform origin,
-            float distance,
-            AnimationSpec a = null
-        )
-        {
-            a ??= new AnimationSpec(1f, 0f);
-            return new SlideImpl(a, new Vector3(distance, 0f, 0f));
         }
     }
 }
