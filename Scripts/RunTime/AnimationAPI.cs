@@ -1,5 +1,4 @@
-
-using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace AnimationPro.RunTime
@@ -43,10 +42,18 @@ namespace AnimationPro.RunTime
             return Tween.Fade(a, false);
         }
 
+
         public static ContentTransform SlideInHorizontal(
             this UITransform origin, 
-            AnimationSpec a = null,
-            DirectionHorizontal direction = DirectionHorizontal.Right
+            [CanBeNull] AnimationSpec a = null
+        )
+        {
+            return origin.SlideInHorizontal(DirectionHorizontal.Right, a);
+        }
+        public static ContentTransform SlideInHorizontal(
+            this UITransform origin,
+            DirectionHorizontal direction,
+            [CanBeNull] AnimationSpec a = null
         )
         {
             return origin.SlideHorizontal(true, a, direction);
@@ -54,17 +61,32 @@ namespace AnimationPro.RunTime
         
         public static ContentTransform SlideOutHorizontal(
             this UITransform origin, 
-            AnimationSpec a = null,
-            DirectionHorizontal direction = DirectionHorizontal.Right
+            [CanBeNull] AnimationSpec a = null
+        )
+        {
+            return origin.SlideOutHorizontal(DirectionHorizontal.Right, a);
+        }
+        public static ContentTransform SlideOutHorizontal(
+            this UITransform origin, 
+            DirectionHorizontal direction,
+            [CanBeNull] AnimationSpec a = null
         )
         {
             return origin.SlideHorizontal(false, a, direction);
         }
 
         public static ContentTransform SlideInVertical(
-            this UITransform origin, 
-            AnimationSpec a = null,
-            DirectionVertical direction = DirectionVertical.Up
+            this UITransform origin,
+            [CanBeNull] AnimationSpec a = null
+        )
+        {
+            return origin.SlideInVertical(DirectionVertical.Up, a);
+        }
+
+        public static ContentTransform SlideInVertical(
+            this UITransform origin,
+            DirectionVertical direction,
+            [CanBeNull] AnimationSpec a = null
         )
         {
             return origin.SlideVertical(true, a, direction);
@@ -72,8 +94,15 @@ namespace AnimationPro.RunTime
         
         public static ContentTransform SlideOutVertical(
             this UITransform origin, 
-            AnimationSpec a = null,
-            DirectionVertical direction = DirectionVertical.Up
+            [CanBeNull] AnimationSpec a = null
+        )
+        {
+            return origin.SlideOutVertical(DirectionVertical.Up, a);
+        }
+        public static ContentTransform SlideOutVertical(
+            this UITransform origin, 
+            DirectionVertical direction,
+            [CanBeNull] AnimationSpec a = null
         )
         {
             return origin.SlideVertical(false, a, direction);
@@ -83,7 +112,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideTo(
             this UITransform origin,
             Vector2 distance,
-            AnimationSpec a = null
+            [CanBeNull] AnimationSpec a = null
         )
         {
             return origin.SlideOut(a, new Vector3(distance.x, distance.y, 0f));
@@ -92,7 +121,7 @@ namespace AnimationPro.RunTime
             this UITransform origin,
             float distance,
             SlideDirection direction,
-            AnimationSpec a = null
+            [CanBeNull] AnimationSpec a = null
         )
         {
             if (direction == SlideDirection.Horizontal)
@@ -104,7 +133,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideFrom(
             this UITransform origin,
             Vector2 distance,
-            AnimationSpec a = null
+            [CanBeNull] AnimationSpec a = null
         )
         {
             return origin.SlideIn(a, new Vector3(distance.x, distance.y, 0f));
@@ -113,7 +142,7 @@ namespace AnimationPro.RunTime
             this UITransform origin,
             float distance,
             SlideDirection direction,
-            AnimationSpec a = null
+            [CanBeNull] AnimationSpec a = null
         )
         {
             if (direction == SlideDirection.Horizontal)

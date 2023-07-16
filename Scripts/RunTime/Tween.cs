@@ -1,5 +1,6 @@
 
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace AnimationPro.RunTime
@@ -7,7 +8,10 @@ namespace AnimationPro.RunTime
     internal static class Tween
     {
         private static readonly AnimationSpec defalutSpec = new(2f, 0f);
-        public static ContentTransform Fade(AnimationSpec a, bool isIn)
+        public static ContentTransform Fade(
+            [CanBeNull] AnimationSpec a, 
+            bool isIn
+        )
         {
             a ??= defalutSpec;
             return new FadeImpl(a, isIn);
@@ -15,7 +19,7 @@ namespace AnimationPro.RunTime
 
         public static ContentTransform SlideIn(
             this UITransform origin,
-            AnimationSpec a, 
+            [CanBeNull] AnimationSpec a, 
             Vector3 distance
         )
         {
@@ -25,7 +29,7 @@ namespace AnimationPro.RunTime
 
         public static ContentTransform SlideOut(
             this UITransform origin,
-            AnimationSpec a, 
+            [CanBeNull] AnimationSpec a, 
             Vector3 distance
         )
         {
@@ -36,7 +40,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideHorizontal(
             this UITransform origin, 
             bool isIn,
-            AnimationSpec a = null, 
+            [CanBeNull] AnimationSpec a, 
             AnimationAPI.DirectionHorizontal direction = AnimationAPI.DirectionHorizontal.Right
         )
         {
@@ -69,7 +73,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideVertical(
             this UITransform origin, 
             bool isIn,
-            AnimationSpec a = null,
+            [CanBeNull] AnimationSpec a,
             AnimationAPI.DirectionVertical direction = AnimationAPI.DirectionVertical.Up
         )
         {
