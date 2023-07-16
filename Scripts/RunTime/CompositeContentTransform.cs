@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AnimationPro.RunTime
 {
     public class CompositeContentTransform : ContentTransform
     {
-        private List<ContentTransform> animations = new List<ContentTransform>();
+        private List<ContentTransform> animations = new ();
 
         public CompositeContentTransform(AnimationSpec a) : base(a) {}
 

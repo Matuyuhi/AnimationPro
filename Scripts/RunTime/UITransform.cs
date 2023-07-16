@@ -34,7 +34,10 @@ namespace AnimationPro.RunTime
 
         protected override void InitializeParam()
         {
-            if (initialized) throw new Exception();
+            if (initialized)
+            {
+                throw new Exception();
+            }
 
             for (var i = 0; i < graphics.Length; i++)
             {
@@ -50,7 +53,10 @@ namespace AnimationPro.RunTime
 
         protected override void RevertInitializeParam()
         {
-            if (!initialized) throw new Exception();
+            if (!initialized)
+            {
+                throw new Exception();
+            }
 
             for (var i = 0; i < graphics.Length; i++)
             {
