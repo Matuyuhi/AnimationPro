@@ -13,7 +13,7 @@ To install this package via NPM to your Unity project, follow these steps:
 ```json
 {
     "dependencies": {
-        "com.matuyuhi.animationpro": "0.1.3"
+        "com.matuyuhi.animationpro": "${other version}"
     }
 }
 ```
