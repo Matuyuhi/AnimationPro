@@ -5,7 +5,7 @@ namespace AnimationPro.RunTime
     internal class FadeImpl : ContentTransform
     {
         private float lastFrameRatio;
-        private bool isIn;
+        private readonly bool isIn;
 
         public FadeImpl(AnimationSpec a, bool isIn) : base(a)
         {

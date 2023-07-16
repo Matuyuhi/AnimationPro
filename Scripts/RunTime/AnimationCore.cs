@@ -26,7 +26,7 @@ namespace AnimationPro.RunTime
             listener?.OnStart();
             SetParam(a.OnInitialized());
 
-            while (time < a.maxDuration)
+            while (time < a.MaxDuration)
             {
                 time += Time.deltaTime;
                 var update = a.OnUpdate(time);
@@ -41,19 +41,19 @@ namespace AnimationPro.RunTime
 
         private void OnUpdate(TransitionSpec update)
         {
-            if (update.alpha.HasValue)
+            if (update.Alpha.HasValue)
             {
-                UpdateAlpha(update.alpha.Value);
+                UpdateAlpha(update.Alpha.Value);
             }
 
-            if (update.rotate.HasValue)
+            if (update.Rotate.HasValue)
             {
-                UpdateRotate(update.rotate.Value);
+                UpdateRotate(update.Rotate.Value);
             }
 
-            if (update.position.HasValue)
+            if (update.Position.HasValue)
             {
-                UpdatePosition(update.position.Value);
+                UpdatePosition(update.Position.Value);
             }
 
         }

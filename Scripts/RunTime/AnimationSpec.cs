@@ -2,31 +2,31 @@ namespace AnimationPro.RunTime
 {
     public sealed class AnimationSpec
     {
-        public readonly float durationMilliSec;
-        public readonly float waitMilliSec;
+        public float DurationMilliSec { get; private set; }
+        public float WaitMilliSec { get; private set; }
 
         public AnimationSpec(
             float durationMilliSec = 0f, 
             float waitMilliSec = 0f
         )
         {
-            this.durationMilliSec = durationMilliSec;
-            this.waitMilliSec = waitMilliSec;
+            DurationMilliSec = durationMilliSec;
+            WaitMilliSec = waitMilliSec;
         }
 
         public float GetRatio(float frame)
         {
-            if (frame >= durationMilliSec + waitMilliSec)
+            if (frame >= DurationMilliSec + WaitMilliSec)
             {
                 return 1.0f;
             }
 
-            if (frame <= waitMilliSec)
+            if (frame <= WaitMilliSec)
             {
                 return 0.0f;
             }
 
-            return (frame - waitMilliSec) / durationMilliSec;
+            return (frame - WaitMilliSec) / DurationMilliSec;
         }
     }
 }

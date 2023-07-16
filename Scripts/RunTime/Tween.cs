@@ -7,13 +7,13 @@ namespace AnimationPro.RunTime
 {
     internal static class Tween
     {
-        private static readonly AnimationSpec defalutSpec = new(2f, 0f);
+        private static readonly AnimationSpec DefalutSpec = new(2f, 0f);
         public static ContentTransform Fade(
             [CanBeNull] AnimationSpec a, 
             bool isIn
         )
         {
-            a ??= defalutSpec;
+            a ??= DefalutSpec;
             return new FadeImpl(a, isIn);
         }
 
@@ -23,7 +23,7 @@ namespace AnimationPro.RunTime
             Vector3 distance
         )
         {
-            a ??= defalutSpec;
+            a ??= DefalutSpec;
             return new SlideImpl(a, origin.GetLocalPosition() - distance, distance);
         }
 
@@ -33,7 +33,7 @@ namespace AnimationPro.RunTime
             Vector3 distance
         )
         {
-            a ??= defalutSpec;
+            a ??= DefalutSpec;
             return new SlideImpl(a, distance);
         }
         
@@ -60,7 +60,7 @@ namespace AnimationPro.RunTime
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
 
-            a ??= defalutSpec;
+            a ??= DefalutSpec;
             Vector3 targetPosition = new Vector3(distance, 0, 0);
             if (isIn)
             {
@@ -93,7 +93,7 @@ namespace AnimationPro.RunTime
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
 
-            a ??= defalutSpec;
+            a ??= DefalutSpec;
             Vector3 targetPosition = new Vector3(0, distance, 0);
             if (isIn)
             {

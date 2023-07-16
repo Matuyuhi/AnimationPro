@@ -3,18 +3,18 @@ namespace AnimationPro.RunTime
     public abstract class ContentTransform
     {
         protected AnimationSpec AnimationSpec { get; set; }
-        public float maxDuration;
+        public float MaxDuration { get; private set; }
 
         protected ContentTransform(AnimationSpec a)
         {
             AnimationSpec = a;
-            maxDuration = a.durationMilliSec + a.waitMilliSec;
+            MaxDuration = a.DurationMilliSec + a.WaitMilliSec;
         }
 
         protected ContentTransform(AnimationSpec a, float maxDuration)
         {
             AnimationSpec = a;
-            this.maxDuration = maxDuration;
+            MaxDuration = maxDuration;
         }
 
         public abstract TransitionSpec OnUpdate(float frame);
@@ -27,6 +27,11 @@ namespace AnimationPro.RunTime
             composite.AddAnimation(a);
             composite.AddAnimation(b);
             return composite;
+        }
+
+        public void SetMaxDuration(float duration)
+        {
+            MaxDuration = duration;
         }
     }
 }

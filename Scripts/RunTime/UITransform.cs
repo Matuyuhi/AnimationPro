@@ -83,24 +83,24 @@ namespace AnimationPro.RunTime
 
         protected override void SetParam(TransitionSpec a)
         {
-            if (a.alpha.HasValue)
+            if (a.Alpha.HasValue)
             {
                 foreach (var graphic in graphics)
                 {
                     var color = graphic.color;
-                    color.a = a.alpha.Value;
+                    color.a = a.Alpha.Value;
                     graphic.color = color;
                 }
             }
 
-            if (a.position.HasValue)
+            if (a.Position.HasValue)
             {
-                rectTransform.localPosition = a.position.Value;
+                rectTransform.localPosition = a.Position.Value;
             }
 
-            if (a.rotate.HasValue)
+            if (a.Rotate.HasValue)
             {
-                var rot = a.rotate.Value;
+                var rot = a.Rotate.Value;
                 rectTransform.Rotate(rot.x, rot.y, rot.z);
             }
         }

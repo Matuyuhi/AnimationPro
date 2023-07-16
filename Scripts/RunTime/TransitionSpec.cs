@@ -5,18 +5,18 @@ namespace AnimationPro.RunTime
 {
     public class TransitionSpec
     {
-        public Quaternion? rotate = null;
-        public Vector3? position = null;
-        public float? alpha = null;
+        public Quaternion? Rotate { get; }
+        public Vector3? Position { get; }
+        public float? Alpha { get; }
         public TransitionSpec(
             Quaternion? rotate = null, 
             Vector3? position = null,
             float? alpha = null
         )
         {
-            this.position = position;
-            this.rotate = rotate;
-            this.alpha = alpha;
+            Position = position;
+            Rotate = rotate;
+            Alpha = alpha;
         }
     }
     
@@ -28,12 +28,13 @@ namespace AnimationPro.RunTime
         )
         {
             return new TransitionSpec(
-            NullableSum(a.rotate, b.rotate),
-            NullableSum(a.position, b.position), 
-            NullableSum(a.alpha, b.alpha)
+            NullableSum(a.Rotate, b.Rotate),
+            NullableSum(a.Position, b.Position), 
+            NullableSum(a.Alpha, b.Alpha)
             );
         }
-        public static Vector3? NullableSum(Vector3? value1, Vector3? value2)
+
+        private static Vector3? NullableSum(Vector3? value1, Vector3? value2)
         {
             if (!value1.HasValue && !value2.HasValue)
             {
@@ -53,7 +54,7 @@ namespace AnimationPro.RunTime
             }
         }
 
-        public static Quaternion? NullableSum(Quaternion? value1, Quaternion? value2)
+        private static Quaternion? NullableSum(Quaternion? value1, Quaternion? value2)
         {
             if (!value1.HasValue && !value2.HasValue)
             {
@@ -73,7 +74,7 @@ namespace AnimationPro.RunTime
             }
         }
 
-        public static float? NullableSum(float? value1, float? value2)
+        private static float? NullableSum(float? value1, float? value2)
         {
             if (!value1.HasValue && !value2.HasValue)
             {
