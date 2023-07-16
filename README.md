@@ -1,6 +1,10 @@
 # Animation Pro
 AnimationPro is a UI and other animation system for Unity. It provides you with a simple API to add smooth animations to your project with ease.
-
+  
+[![NPM Package](https://img.shields.io/npm/v/com.matuyuhi.animationpro)](https://www.npmjs.com/package/com.matuyuhi.animationpro)
+[![Licence](https://img.shields.io/npm/l/com.matuyuhi.animationpro)](https://github.com/Matuyuhi/AnimationPro/blob/main/LICENSE)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/de7a60820baa4b41b0532f66d850d2bc)](https://app.codacy.com/gh/Matuyuhi/AnimationPro/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![npm](https://img.shields.io/npm/dt/com.matuyuhi.animationpro.svg)](https://npmjs.com/package/com.matuyuhi.animationpro)
 ## Switch Language
 - [Japanese(日本語)](./README-ja.md)
 ## Installation
