@@ -10,16 +10,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ---
-## [0.5.1]
+## [0.6.0]
 
 ### Added
 - READMEの日本語版追加
+- SlideTO SlideFrom and more
 
 ### Changed
 - コード整形
 
 ### Fixed
 - FadeOutができない問題を修正
+- nullチェック周りの例外処理を追加
 ---
 ## [0.5.0]
 
@@ -83,9 +85,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Fixed security issue 1
 
-[Unreleased]: https://github.com/Matuyuhi/AnimationPro/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/Matuyuhi/AnimationPro/compare/v0.6.0...HEAD
 [0.1.0]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1
 [0.1.3]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1.3
 [0.1.4]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1.4
 [0.5.0]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.5.0
-[0.5.1]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.5.1
+[0.6.0]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.6.0

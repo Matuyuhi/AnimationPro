@@ -23,6 +23,7 @@ To install this package via NPM to your Unity project, follow these steps:
 
 ## Usage
 
+### [Document file](./ANIMATIONS.md)
 Here's a basic example of how to use AnimationPro:
 
 ``` csharp
@@ -30,10 +31,10 @@ Here's a basic example of how to use AnimationPro:
 // Get the UITransform
  a = GetComponent<UITransform>();
 // Slide out screen horizontal direction & fade out
-// to the right over 2 second
+// to the right over 3 second
 a.Animation(
-    a.SlideHorizontal(new AnimationSpec(2f, 0f), AP.DirectionHorizontal.Left) + 
-    a.FadeOut(new AnimationSpec(2f, 0f))
+    a.SlideInHorizontal(new AnimationSpec(2f, 0f), AP.DirectionHorizontal.Left) + 
+    a.FadeOut(new AnimationSpec(3f, 0f))
 );
 ```
 ## Contributing

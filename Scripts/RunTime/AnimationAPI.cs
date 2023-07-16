@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace AnimationPro.RunTime
 {
+    /// <summary>
+    /// Animations List
+    /// </summary>
     public static class AnimationAPI
     {
         public enum SlideDirection

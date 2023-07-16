@@ -29,7 +29,6 @@ namespace AnimationPro.RunTime
             {
                 result = result.CombineWith(animation.OnInitialized());
             }
-            Debug.Log(result.alpha);
             return result;
         }
 
