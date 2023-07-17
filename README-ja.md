@@ -10,17 +10,52 @@ AnimationProはUnity用のUIおよびその他のアニメーションシステ�
 - [English(英語)](./README.md)
 ## Installation
 
-このパッケージをNPM経由でUnityプロジェクトにインストールするには、
-以下の手順を守ってください：
+To install this package via NPM to your Unity project, follow these steps:
+### Install from a Git URL
 
-1. Unityプロジェクトを開き、Packagesフォルダに移動します。
-2. manifest.jsonという新しいファイルを作成します（存在しない場合）。
-3. manifest.jsonファイルを開き、次の行を "dependencies" セクションに追加します：
+UPMパッケージを直接Git URLからインストールすることができます。パッケージをGit URLからロードするには:  
+
+* [Unity Package Manager](https://docs.unity3d.com/Manual/upm-ui.html)のウィンドウを開きます。
+* ステータスバーの**+**ボタンをクリックします。
+* パッケージを追加するためのオプションが表示されます。
+* 追加メニューから、Git URLからパッケージを追加を選択します。テキストボックスと「追加」ボタンが表示されます。
+* テキストボックスに`https://github.com/Matuyuhi/AnimationPro.git` のGit URLを入力し、「追加」をクリックします。
+* 特定のパッケージバージョンをインストールするには、指定したバージョンのURLを使用します。
+    * `https://github.com/Matuyuhi/AnimationPro.git#X.Y.Z`
+    * ここで述べられているバージョン`X.Y.Z`は、取得したいバージョンに置き換えてください。
+    * 利用可能なすべてのリリースは [here](https://github.com/Matuyuhi/AnimationPro/releases)から見つけることができます。
+    * 最新の利用可能なリリースバージョンは
+      [![Last Release](https://img.shields.io/github/v/release/Matuyuhi/AnimationPro)](https://github.com/Matuyuhi/AnimationPro/releases/latest)です。
+
+Unityがサポートしているプロトコルについての詳細は、[Git URLs](https://docs.unity3d.com/Manual/upm-git.html)をご覧ください。
+
+### Install from NPM
+
+* プロジェクトの`Packages`ディレクトリに移動します。
+* テキストエディタで[project manifest file](https://docs.unity3d.com/Manual/upm-manifestPrj.html) `manifest.json` を調整します。
+* Ensure `https://registry.npmjs.org/` is part of `scopedRegistries`.
+  * `com.matuyuhi`が`scopes`の一部であることを確認します。
+  * 最新バージョンを指定して、`com.matuyuhi.animationpro`を`dependencies`に追加します。
+
+最小の例は以下のようになります。ここで述べられているバージョン`X.Y.Z`は、
+現在の[the latest released version](https://www.npmjs.com/package/com.matuyuhi.animationpro)
+である[![NPM Package](https://img.shields.io/npm/v/com.matuyuhi.animationpro?color=blue)](https://www.npmjs.com/package/com.matuyuhi.animationpro)
+に置き換えてください。
 ```json
 {
-    "dependencies": {
-        "com.matuyuhi.animationpro": "${other version}"
+  "scopedRegistries": [
+    {
+      "name": "npmjs",
+      "url": "https://registry.npmjs.org/",
+      "scopes": [
+        "com.matuyuhi"
+      ]
     }
+  ],
+
+  "dependencies": {
+    "com.matuyuhi.animationpro": "X.Y.Z"
+  }
 }
 ```
 

@@ -11,15 +11,51 @@ AnimationPro is a UI and other animation system for Unity. It provides you with 
 ## Installation
 
 To install this package via NPM to your Unity project, follow these steps:
+### Install from a Git URL
 
-1. Open your Unity project and navigate to the Packages folder.
-2. Create a new file named manifest.json if it doesn't exist.
-3. Open the manifest.json file and add the following line to the "dependencies" section:
+You can install the UPM package via directly Git URL. To load a package from a Git URL:
+
+* Open [Unity Package Manager](https://docs.unity3d.com/Manual/upm-ui.html) window.
+* Click the add **+** button in the status bar.
+* The options for adding packages appear.
+* Select Add package from git URL from the add menu. A text box and an Add button appear.
+* Enter the `https://github.com/Matuyuhi/AnimationPro.git` Git URL in the text box and click Add.
+* You may also install a specific package version by using the URL with the specified version.
+    * `https://github.com/Matuyuhi/AnimationPro.git#X.Y.Z`
+    * Please note that the version `X.Y.Z` stated here is to be replaced with the version you would like to get.
+    * You can find all the available releases [here](https://github.com/Matuyuhi/AnimationPro/releases).
+    * The latest available release version
+      is [![Last Release](https://img.shields.io/github/v/release/Matuyuhi/AnimationPro)](https://github.com/Matuyuhi/AnimationPro/releases/latest)
+
+For more information about what protocols Unity supports, see [Git URLs](https://docs.unity3d.com/Manual/upm-git.html).
+
+### Install from NPM
+
+* Navigate to the `Packages` directory of your project.
+* Adjust the [project manifest file](https://docs.unity3d.com/Manual/upm-manifestPrj.html) `manifest.json` in a text
+  editor.
+* Ensure `https://registry.npmjs.org/` is part of `scopedRegistries`.
+    * Ensure `com.matuyuhi` is part of `scopes`.
+    * Add `com.matuyuhi.animationpro` to the `dependencies`, stating the latest version.
+
+A minimal example ends up looking like this. Please note that the version `X.Y.Z` stated here is to be replaced
+with [the latest released version](https://www.npmjs.com/package/com.matuyuhi.animationpro), which is
+currently [![NPM Package](https://img.shields.io/npm/v/com.matuyuhi.animationpro?color=blue)](https://www.npmjs.com/package/com.matuyuhi.animationpro).
 ```json
 {
-    "dependencies": {
-        "com.matuyuhi.animationpro": "${other version}"
+  "scopedRegistries": [
+    {
+      "name": "npmjs",
+      "url": "https://registry.npmjs.org/",
+      "scopes": [
+        "com.matuyuhi"
+      ]
     }
+  ],
+
+  "dependencies": {
+    "com.matuyuhi.animationpro": "X.Y.Z"
+  }
 }
 ```
 
