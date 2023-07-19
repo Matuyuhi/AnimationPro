@@ -1,4 +1,3 @@
-
 using System;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -7,40 +6,40 @@ namespace AnimationPro.RunTime
 {
     internal static class Tween
     {
-        private static readonly AnimationSpec DefalutSpec = new(2f, 0f);
+        private static readonly RateSpec DefaultSpec = new(2f, 0f);
         public static ContentTransform Fade(
-            [CanBeNull] AnimationSpec a, 
+            [CanBeNull] RateSpec a, 
             bool isIn
         )
         {
-            a ??= DefalutSpec;
+            a ??= DefaultSpec;
             return new FadeImpl(a, isIn);
         }
 
         public static ContentTransform SlideIn(
             this UITransform origin,
-            [CanBeNull] AnimationSpec a, 
+            [CanBeNull] RateSpec a, 
             Vector3 distance
         )
         {
-            a ??= DefalutSpec;
+            a ??= DefaultSpec;
             return new SlideImpl(a, origin.GetLocalPosition() - distance, distance);
         }
 
         public static ContentTransform SlideOut(
             this UITransform origin,
-            [CanBeNull] AnimationSpec a, 
+            [CanBeNull] RateSpec a, 
             Vector3 distance
         )
         {
-            a ??= DefalutSpec;
+            a ??= DefaultSpec;
             return new SlideImpl(a, distance);
         }
         
         public static ContentTransform SlideHorizontal(
             this UITransform origin, 
             bool isIn,
-            [CanBeNull] AnimationSpec a, 
+            [CanBeNull] RateSpec a, 
             AnimationAPI.DirectionHorizontal direction = AnimationAPI.DirectionHorizontal.Right
         )
         {
@@ -60,7 +59,7 @@ namespace AnimationPro.RunTime
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
 
-            a ??= DefalutSpec;
+            a ??= DefaultSpec;
             Vector3 targetPosition = new Vector3(distance, 0, 0);
             if (isIn)
             {
@@ -73,7 +72,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideVertical(
             this UITransform origin, 
             bool isIn,
-            [CanBeNull] AnimationSpec a,
+            [CanBeNull] RateSpec a,
             AnimationAPI.DirectionVertical direction = AnimationAPI.DirectionVertical.Up
         )
         {
@@ -93,7 +92,7 @@ namespace AnimationPro.RunTime
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
 
-            a ??= DefalutSpec;
+            a ??= DefaultSpec;
             Vector3 targetPosition = new Vector3(0, distance, 0);
             if (isIn)
             {

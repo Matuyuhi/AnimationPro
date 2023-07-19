@@ -1,4 +1,4 @@
-using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +18,7 @@ namespace AnimationPro.RunTime
             
             graphics = GetComponentsInChildren<Graphic>();
             initAlpha = new float[graphics.Length];
+            initialized = false;
         }
         protected override void UpdateAlpha(float a)
         {
@@ -25,7 +26,7 @@ namespace AnimationPro.RunTime
             {
                 var color = graphic.color;
                 color.a += a;
-                if (color.a <= 1.0f && color.a >= 0.0f)
+                if (color.a is <= 1.0f and >= 0.0f)
                 {
                     graphic.color = color;
                 }
@@ -36,7 +37,7 @@ namespace AnimationPro.RunTime
         {
             if (initialized)
             {
-                throw new Exception();
+                throw new ExternalException();
             }
 
             for (var i = 0; i < graphics.Length; i++)
@@ -55,7 +56,7 @@ namespace AnimationPro.RunTime
         {
             if (!initialized)
             {
-                throw new Exception();
+                throw new ExternalException();
             }
 
             for (var i = 0; i < graphics.Length; i++)

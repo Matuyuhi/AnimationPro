@@ -7,11 +7,11 @@ namespace AnimationPro.RunTime
 {
     public abstract class AnimationCore: MonoBehaviour
     {
-        protected IAnimationListener listener;
+        private IAnimationListener listener;
         protected float[] initAlpha;
         protected Vector3 initPos;
         protected Quaternion initQuaternion;
-        protected bool initialized = false;
+        protected bool initialized;
 
         public void Animation(ContentTransform a, [CanBeNull] AnimationListener animationListener = null)
         {

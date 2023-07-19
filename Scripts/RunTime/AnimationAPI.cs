@@ -28,7 +28,7 @@ namespace AnimationPro.RunTime
         
         public static ContentTransform FadeIn(
             this UITransform origin,
-            AnimationSpec a = null
+            RateSpec a = null
         )
         {
             return Tween.Fade(a, true);
@@ -36,7 +36,7 @@ namespace AnimationPro.RunTime
         
         public static ContentTransform FadeOut(
             this UITransform origin,
-            AnimationSpec a = null
+            RateSpec a = null
         )
         {
             return Tween.Fade(a, false);
@@ -45,7 +45,7 @@ namespace AnimationPro.RunTime
 
         public static ContentTransform SlideInHorizontal(
             this UITransform origin, 
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideInHorizontal(DirectionHorizontal.Right, a);
@@ -53,7 +53,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideInHorizontal(
             this UITransform origin,
             DirectionHorizontal direction,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideHorizontal(true, a, direction);
@@ -61,7 +61,7 @@ namespace AnimationPro.RunTime
         
         public static ContentTransform SlideOutHorizontal(
             this UITransform origin, 
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideOutHorizontal(DirectionHorizontal.Right, a);
@@ -69,7 +69,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideOutHorizontal(
             this UITransform origin, 
             DirectionHorizontal direction,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideHorizontal(false, a, direction);
@@ -77,7 +77,7 @@ namespace AnimationPro.RunTime
 
         public static ContentTransform SlideInVertical(
             this UITransform origin,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideInVertical(DirectionVertical.Up, a);
@@ -86,7 +86,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideInVertical(
             this UITransform origin,
             DirectionVertical direction,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideVertical(true, a, direction);
@@ -94,7 +94,7 @@ namespace AnimationPro.RunTime
         
         public static ContentTransform SlideOutVertical(
             this UITransform origin, 
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideOutVertical(DirectionVertical.Up, a);
@@ -102,7 +102,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideOutVertical(
             this UITransform origin, 
             DirectionVertical direction,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideVertical(false, a, direction);
@@ -112,7 +112,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideTo(
             this UITransform origin,
             Vector2 distance,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideOut(a, new Vector3(distance.x, distance.y, 0f));
@@ -121,7 +121,7 @@ namespace AnimationPro.RunTime
             this UITransform origin,
             float distance,
             SlideDirection direction,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             if (direction == SlideDirection.Horizontal)
@@ -133,7 +133,7 @@ namespace AnimationPro.RunTime
         public static ContentTransform SlideFrom(
             this UITransform origin,
             Vector2 distance,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             return origin.SlideIn(a, new Vector3(distance.x, distance.y, 0f));
@@ -142,7 +142,7 @@ namespace AnimationPro.RunTime
             this UITransform origin,
             float distance,
             SlideDirection direction,
-            [CanBeNull] AnimationSpec a = null
+            [CanBeNull] RateSpec a = null
         )
         {
             if (direction == SlideDirection.Horizontal)

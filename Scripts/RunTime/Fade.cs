@@ -7,7 +7,7 @@ namespace AnimationPro.RunTime
         private float lastFrameRatio;
         private readonly bool isIn;
 
-        public FadeImpl(AnimationSpec a, bool isIn) : base(a)
+        public FadeImpl(RateSpec a, bool isIn) : base(a)
         {
             this.isIn = isIn;
         }
@@ -19,7 +19,7 @@ namespace AnimationPro.RunTime
 
         public override TransitionSpec OnUpdate(float frame)
         {
-            var currentFrameRatio = AnimationSpec.GetRatio(frame);
+            var currentFrameRatio = RateSpec.GetRate(frame);
             var diff = currentFrameRatio - lastFrameRatio;
 
             // Store the current value for the next frame

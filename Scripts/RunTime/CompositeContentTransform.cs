@@ -6,7 +6,7 @@ namespace AnimationPro.RunTime
     {
         private readonly List<ContentTransform> animations = new ();
 
-        public CompositeContentTransform(AnimationSpec a) : base(a) {}
+        public CompositeContentTransform(RateSpec a) : base(a) {}
 
         public void AddAnimation(ContentTransform animation)
         {

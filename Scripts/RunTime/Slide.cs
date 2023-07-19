@@ -7,7 +7,7 @@ namespace AnimationPro.RunTime
         private readonly Vector3 distance;
         private float lastFrameRatio;
         private readonly Vector3? initPos;
-        public SlideImpl(AnimationSpec a, Vector3 distance, Vector3? initPos = null) : base(a)
+        public SlideImpl(RateSpec a, Vector3 distance, Vector3? initPos = null) : base(a)
         {
             this.initPos = initPos;
             this.distance = distance;
@@ -20,7 +20,7 @@ namespace AnimationPro.RunTime
 
         public override TransitionSpec OnUpdate(float frame)
         {
-            var currentFrameRatio = AnimationSpec.GetRatio(frame);
+            var currentFrameRatio = RateSpec.GetRate(frame);
             var diff = currentFrameRatio - lastFrameRatio;
             lastFrameRatio = currentFrameRatio;
             return new TransitionSpec(position: distance * diff);
