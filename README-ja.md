@@ -69,11 +69,11 @@ AnimationProの基本的な使用例は以下の通りです：
 ``` csharp
 // Attach UITransform Component in gameObject
 // Get the UITransform
- a = GetComponent<UITransform>();
-// 左側へ2秒かけて画面を水平方向にスライドアウトさせてフェードアウトします
+a = GetComponent<UITransform>();
+// 左側へ1秒かけて画面を水平方向にスライドアウトさせてフェードアウトします
 a.Animation(
-    a.SlideHorizontal(new AnimationSpec(2f, 0f), AP.DirectionHorizontal.Left) + 
-    a.FadeOut(new AnimationSpec(2f, 0f))
+    a.SlideOutHorizontal(AnimationAPI.DirectionHorizontal.Left, Easings.QuartOut(1f)) + 
+    a.FadeOut(Easings.QuartOut(1f))
 );
 ```
 ## Contributing

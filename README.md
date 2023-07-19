@@ -70,12 +70,12 @@ Here's a basic example of how to use AnimationPro:
 ``` csharp
 // Attach UITransform Component in gameObject
 // Get the UITransform
- a = GetComponent<UITransform>();
-// Slide out screen horizontal direction & fade out
-// to the right over 3 second
+a = GetComponent<UITransform>();
+// Slide out screen left direction & fade out
+// to the right over 1 second
 a.Animation(
-    a.SlideInHorizontal(new AnimationSpec(2f, 0f), AP.DirectionHorizontal.Left) + 
-    a.FadeOut(new AnimationSpec(3f, 0f))
+    a.SlideOutHorizontal(AnimationAPI.DirectionHorizontal.Left, Easings.QuartOut(1f)) + 
+    a.FadeOut(Easings.QuartOut(1f))
 );
 ```
 ## Contributing
