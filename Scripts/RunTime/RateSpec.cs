@@ -1,11 +1,12 @@
 namespace AnimationPro.RunTime
 {
     internal delegate float RateCall(float rate);
+
+    /// <summary>
+    /// These are the parameters that make the animation work
+    /// </summary>
     public class RateSpec
     {
-        public float DurationSec { get; }
-        public float WaitSec { get; }
-
         private readonly RateCall callback;
 
         internal RateSpec(
@@ -18,8 +19,9 @@ namespace AnimationPro.RunTime
             WaitSec = waitSec;
             callback = rateCall;
         }
+
         internal RateSpec(
-            float durationSec = 0f, 
+            float durationSec = 0f,
             float waitSec = 0f
         )
         {
@@ -28,15 +30,17 @@ namespace AnimationPro.RunTime
             callback = rate => rate;
         }
 
+        public float DurationSec { get; }
+        public float WaitSec { get; }
+
         internal float GetRate(float frame)
         {
-            if (frame >= DurationSec + WaitSec) { return 1.0f; }
-            if (frame <= WaitSec) { return 0.0f; }
+            if (frame >= DurationSec + WaitSec) return 1.0f;
+            if (frame <= WaitSec) return 0.0f;
 
             var rate = callback.Invoke((frame - WaitSec) / DurationSec);
 
             return rate;
         }
-        
     }
 }

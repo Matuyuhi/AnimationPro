@@ -6,9 +6,10 @@ namespace AnimationPro.RunTime
 {
     internal static class Tween
     {
-        private static readonly RateSpec DefaultSpec = new(2f, 0f);
+        private static readonly RateSpec DefaultSpec = new(2f);
+
         public static ContentTransform Fade(
-            [CanBeNull] RateSpec a, 
+            [CanBeNull] RateSpec a,
             bool isIn
         )
         {
@@ -17,8 +18,8 @@ namespace AnimationPro.RunTime
         }
 
         public static ContentTransform SlideIn(
-            this UITransform origin,
-            [CanBeNull] RateSpec a, 
+            this AnimationBehaviour origin,
+            [CanBeNull] RateSpec a,
             Vector3 distance
         )
         {
@@ -27,19 +28,19 @@ namespace AnimationPro.RunTime
         }
 
         public static ContentTransform SlideOut(
-            this UITransform origin,
-            [CanBeNull] RateSpec a, 
+            this AnimationBehaviour origin,
+            [CanBeNull] RateSpec a,
             Vector3 distance
         )
         {
             a ??= DefaultSpec;
             return new SlideImpl(a, distance);
         }
-        
+
         public static ContentTransform SlideHorizontal(
-            this UITransform origin, 
+            this AnimationBehaviour origin,
             bool isIn,
-            [CanBeNull] RateSpec a, 
+            [CanBeNull] RateSpec a,
             AnimationAPI.DirectionHorizontal direction = AnimationAPI.DirectionHorizontal.Right
         )
         {
@@ -60,17 +61,18 @@ namespace AnimationPro.RunTime
             }
 
             a ??= DefaultSpec;
-            Vector3 targetPosition = new Vector3(distance, 0, 0);
+            var targetPosition = new Vector3(distance, 0, 0);
             if (isIn)
             {
                 var pos = origin.GetLocalPosition();
                 return new SlideImpl(a, -targetPosition, new Vector3(distance, pos.y, pos.z));
             }
+
             return new SlideImpl(a, targetPosition);
         }
 
         public static ContentTransform SlideVertical(
-            this UITransform origin, 
+            this AnimationBehaviour origin,
             bool isIn,
             [CanBeNull] RateSpec a,
             AnimationAPI.DirectionVertical direction = AnimationAPI.DirectionVertical.Up
@@ -93,25 +95,23 @@ namespace AnimationPro.RunTime
             }
 
             a ??= DefaultSpec;
-            Vector3 targetPosition = new Vector3(0, distance, 0);
+            var targetPosition = new Vector3(0, distance, 0);
             if (isIn)
             {
                 var pos = origin.GetLocalPosition();
                 return new SlideImpl(a, -targetPosition, new Vector3(pos.x, distance, pos.z));
             }
+
             return new SlideImpl(a, targetPosition);
         }
-        
-        private static (RectTransform, Vector2) GetCommonSlideParts(this UITransform origin)
+
+        private static (RectTransform, Vector2) GetCommonSlideParts(this AnimationBehaviour origin)
         {
-            RectTransform canvasRectTransform = origin.GetComponentInParent<Canvas>()?.GetComponent<RectTransform>();
+            var canvasRectTransform = origin.GetComponentInParent<Canvas>()?.GetComponent<RectTransform>();
 
-            if (canvasRectTransform == null)
-            {
-                throw new Exception("UITransform must be a child of a Canvas.");
-            }
+            if (canvasRectTransform == null) throw new Exception("UITransform must be a child of a Canvas.");
 
-            Vector2 canvasCenterPosInCanvas = new Vector2(
+            var canvasCenterPosInCanvas = new Vector2(
                 canvasRectTransform.rect.width / 2 + origin.GetLocalPosition().x,
                 canvasRectTransform.rect.height / 2 + origin.GetLocalPosition().y
             );

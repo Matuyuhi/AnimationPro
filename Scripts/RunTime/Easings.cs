@@ -35,7 +35,7 @@ namespace AnimationPro.RunTime
                 rateCall: x => (float)StartEndBack(x)
             );
         }
-        
+
         public static RateSpec BackIn(float delaySec, float waitSec = 0f)
         {
             return new RateSpec(
@@ -44,7 +44,7 @@ namespace AnimationPro.RunTime
                 rateCall: x => (float)StartBack(x)
             );
         }
-        
+
         public static RateSpec BackOut(float delaySec, float waitSec = 0f)
         {
             return new RateSpec(
@@ -62,7 +62,7 @@ namespace AnimationPro.RunTime
                 rateCall: x => (float)EndedQuart(x, quartRate)
             );
         }
-        
+
         public static RateSpec QuartOut(float delaySec, float waitSec = 0f, float quartRate = 1f)
         {
             return new RateSpec(
@@ -80,8 +80,9 @@ namespace AnimationPro.RunTime
                 rateCall: x => (float)InOutQuart(x)
             );
         }
-        
-        private static double InOutQuart(float x, float rate = 1f) {
+
+        private static double InOutQuart(float x, float rate = 1f)
+        {
             return x < 0.5 ? 8 * x * x * x * x : 1 - Math.Pow(-2 * x + 2, 4) / 2;
         }
 
@@ -93,15 +94,16 @@ namespace AnimationPro.RunTime
                 rateCall: x => 1f - (float)Math.Sqrt(1 - Math.Pow(x, 2))
             );
         }
+
         public static RateSpec CircOut(float delaySec, float waitSec = 0f)
         {
             return new RateSpec(
-                    durationSec: delaySec,
-                    waitSec: waitSec,
-                    rateCall: x => (float)Math.Sqrt(1 - Math.Pow(x - 1, 2))
-                );
+                durationSec: delaySec,
+                waitSec: waitSec,
+                rateCall: x => (float)Math.Sqrt(1 - Math.Pow(x - 1, 2))
+            );
         }
-        
+
 
         private static double EndedQuart(float x, float rate)
         {
@@ -114,7 +116,7 @@ namespace AnimationPro.RunTime
             const double c2 = c1 * 1.525;
 
             return x < 0.5
-                ? (Math.Pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
+                ? Math.Pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2) / 2
                 : (Math.Pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2;
         }
 
@@ -139,15 +141,9 @@ namespace AnimationPro.RunTime
             const double n1 = 7.5625;
             const double d1 = 2.75;
 
-            if (x < 1 / d1) {
-                return n1 * x * x;
-            }
-            if (x < 2 / d1) {
-                return n1 * (x -= (float)(1.5 / d1)) * x + 0.75;
-            }
-            if (x < 2.5 / d1) {
-                return n1 * (x -= (float)(2.25 / d1)) * x + 0.9375;
-            }
+            if (x < 1 / d1) return n1 * x * x;
+            if (x < 2 / d1) return n1 * (x -= (float)(1.5 / d1)) * x + 0.75;
+            if (x < 2.5 / d1) return n1 * (x -= (float)(2.25 / d1)) * x + 0.9375;
             return n1 * (x -= (float)(2.625 / d1)) * x + 0.984375;
         }
     }

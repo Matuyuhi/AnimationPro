@@ -1,155 +1,279 @@
+//// edit by matuyuhi
 using JetBrains.Annotations;
 using UnityEngine;
 
 namespace AnimationPro.RunTime
 {
     /// <summary>
-    /// Animations List
+    /// AnimationAPI is a class providing a variety of animation motions.
     /// </summary>
     public static class AnimationAPI
     {
+        /// <summary>
+        /// Enum representing horizontal directions: Left and Right.
+        /// </summary>
+        public enum DirectionHorizontal
+        {
+            /// <summary>
+            /// Left direction from the player
+            /// </summary>
+            Left,
+            /// <summary>
+            /// right direction from the player
+            /// </summary>
+            Right
+        }
+
+        /// <summary>
+        /// Enum representing vertical directions: Up and Down.
+        /// </summary>
+        public enum DirectionVertical
+        {
+            /// <summary>
+            /// upper direction from the player
+            /// </summary>
+            Up,
+            /// <summary>
+            /// down direction from the player
+            /// </summary>
+            Down
+        }
+
+        /// <summary>
+        /// Enum representing sliding directions: Horizontal(right|left) and Vertical(up|down).
+        /// </summary>
         public enum SlideDirection
         {
+            /// <summary>
+            /// Horizontal(right|left) direction from the player
+            /// </summary>
             Horizontal,
+            /// <summary>
+            /// Vertical(up|down) direction from the player
+            /// </summary>
             Vertical
         }
 
-        public enum DirectionVertical
-        {
-            Up,
-            Down,
-        }
-
-        public enum DirectionHorizontal
-        {
-            Left,
-            Right
-        }
-        
+        /// <summary>
+        /// Creates a fade in animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform FadeIn(
-            this UITransform origin,
-            RateSpec a = null
+            this AnimationBehaviour origin,
+            RateSpec spec = null
         )
         {
-            return Tween.Fade(a, true);
+            return Tween.Fade(spec, true);
         }
         
+        /// <summary>
+        /// Creates a fade out animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform FadeOut(
-            this UITransform origin,
-            RateSpec a = null
+            this AnimationBehaviour origin,
+            RateSpec spec = null
         )
         {
-            return Tween.Fade(a, false);
+            return Tween.Fade(spec, false);
         }
 
-
+        
+        /// <summary>
+        /// Creates a slide in with horizontal direction animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideInHorizontal(
-            this UITransform origin, 
-            [CanBeNull] RateSpec a = null
+            this AnimationBehaviour origin,
+            [CanBeNull] RateSpec spec = null
         )
         {
-            return origin.SlideInHorizontal(DirectionHorizontal.Right, a);
+            return origin.SlideInHorizontal(DirectionHorizontal.Right, spec);
         }
+
+        /// <summary>
+        /// Creates a slide in with horizontal direction animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="direction">moving horizontal direction left or right</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideInHorizontal(
-            this UITransform origin,
+            this AnimationBehaviour origin,
             DirectionHorizontal direction,
-            [CanBeNull] RateSpec a = null
+            [CanBeNull] RateSpec spec = null
         )
         {
-            return origin.SlideHorizontal(true, a, direction);
+            return origin.SlideHorizontal(true, spec, direction);
+        }
+
+        /// <summary>
+        /// Creates a slide out with horizontal direction animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
+        public static ContentTransform SlideOutHorizontal(
+            this AnimationBehaviour origin,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.SlideOutHorizontal(DirectionHorizontal.Right, spec);
+        }
+
+        /// <summary>
+        /// Creates a slide out with horizontal direction animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="direction">moving horizontal direction left or right</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
+        public static ContentTransform SlideOutHorizontal(
+            this AnimationBehaviour origin,
+            DirectionHorizontal direction,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.SlideHorizontal(false, spec, direction);
+        }
+
+        
+        /// <summary>
+        /// Creates a slide in with vertical direction animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
+        public static ContentTransform SlideInVertical(
+            this AnimationBehaviour origin,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.SlideInVertical(DirectionVertical.Up, spec);
+        }
+
+        /// <summary>
+        /// Creates a slide in with vertical direction animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="direction">moving vertical direction up or down</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
+        public static ContentTransform SlideInVertical(
+            this AnimationBehaviour origin,
+            DirectionVertical direction,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.SlideVertical(true, spec, direction);
+        }
+
+        /// <summary>
+        /// Creates a slide out with vertical direction animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
+        public static ContentTransform SlideOutVertical(
+            this AnimationBehaviour origin,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.SlideOutVertical(DirectionVertical.Up, spec);
         }
         
-        public static ContentTransform SlideOutHorizontal(
-            this UITransform origin, 
-            [CanBeNull] RateSpec a = null
-        )
-        {
-            return origin.SlideOutHorizontal(DirectionHorizontal.Right, a);
-        }
-        public static ContentTransform SlideOutHorizontal(
-            this UITransform origin, 
-            DirectionHorizontal direction,
-            [CanBeNull] RateSpec a = null
-        )
-        {
-            return origin.SlideHorizontal(false, a, direction);
-        }
-
-        public static ContentTransform SlideInVertical(
-            this UITransform origin,
-            [CanBeNull] RateSpec a = null
-        )
-        {
-            return origin.SlideInVertical(DirectionVertical.Up, a);
-        }
-
-        public static ContentTransform SlideInVertical(
-            this UITransform origin,
+        /// <summary>
+        /// Creates a slide out with vertical direction animation on the given object.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="direction">moving vertical direction up or down</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the FadeIn animation movement.</returns>
+        public static ContentTransform SlideOutVertical(
+            this AnimationBehaviour origin,
             DirectionVertical direction,
-            [CanBeNull] RateSpec a = null
+            [CanBeNull] RateSpec spec= null
         )
         {
-            return origin.SlideVertical(true, a, direction);
+            return origin.SlideVertical(false, spec, direction);
         }
         
-        public static ContentTransform SlideOutVertical(
-            this UITransform origin, 
-            [CanBeNull] RateSpec a = null
+        
+        /// <summary>
+        /// Animates the given object to slide to a specific Vector2 distance.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="distance">The Vector2 distance to slide to.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the SlideTo animation movement.</returns>
+        public static ContentTransform SlideTo(
+            this AnimationBehaviour origin,
+            Vector2 distance,
+            [CanBeNull] RateSpec spec= null
         )
         {
-            return origin.SlideOutVertical(DirectionVertical.Up, a);
-        }
-        public static ContentTransform SlideOutVertical(
-            this UITransform origin, 
-            DirectionVertical direction,
-            [CanBeNull] RateSpec a = null
-        )
-        {
-            return origin.SlideVertical(false, a, direction);
+            return origin.SlideOut(spec, new Vector3(distance.x, distance.y, 0f));
         }
 
+        /// <summary>
+        /// Animates the given object to slide to a specific distance in the specified direction.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="distance">The distance to slide to.</param>
+        /// <param name="direction">The direction of the slide animation.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the SlideTo animation movement.</returns>
+        public static ContentTransform SlideTo(
+            this AnimationBehaviour origin,
+            float distance,
+            SlideDirection direction,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            if (direction == SlideDirection.Horizontal) return origin.SlideOut(spec, new Vector3(distance, 0f, 0f));
+            return origin.SlideOut(spec, new Vector3(0f, distance, 0f));
+        }
 
-        public static ContentTransform SlideTo(
-            this UITransform origin,
+        
+        /// <summary>
+        /// Animates the given object to slide from a specific Vector2 distance.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="distance">The Vector2 distance to slide from.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the SlideFrom animation movement.</returns>
+        public static ContentTransform SlideFrom(
+            this AnimationBehaviour origin,
             Vector2 distance,
-            [CanBeNull] RateSpec a = null
+            [CanBeNull] RateSpec spec= null
         )
         {
-            return origin.SlideOut(a, new Vector3(distance.x, distance.y, 0f));
+            return origin.SlideIn(spec, new Vector3(distance.x, distance.y, 0f));
         }
-        public static ContentTransform SlideTo(
-            this UITransform origin,
+
+        /// <summary>
+        /// Animates the given object to slide from a specific distance in the specified direction.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="distance">The distance to slide from.</param>
+        /// <param name="direction">The direction of the slide animation.</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the SlideFrom animation movement.</returns>
+        public static ContentTransform SlideFrom(
+            this AnimationBehaviour origin,
             float distance,
             SlideDirection direction,
-            [CanBeNull] RateSpec a = null
+            [CanBeNull] RateSpec spec= null
         )
         {
-            if (direction == SlideDirection.Horizontal)
-            {
-                return origin.SlideOut(a, new Vector3(distance, 0f, 0f));
-            }
-            return origin.SlideOut(a, new Vector3(0f, distance, 0f));
-        }
-        public static ContentTransform SlideFrom(
-            this UITransform origin,
-            Vector2 distance,
-            [CanBeNull] RateSpec a = null
-        )
-        {
-            return origin.SlideIn(a, new Vector3(distance.x, distance.y, 0f));
-        }
-        public static ContentTransform SlideFrom(
-            this UITransform origin,
-            float distance,
-            SlideDirection direction,
-            [CanBeNull] RateSpec a = null
-        )
-        {
-            if (direction == SlideDirection.Horizontal)
-            {
-                return origin.SlideIn(a, new Vector3(distance, 0f, 0f));
-            }
-            return origin.SlideIn(a, new Vector3(0f, distance, 0f));
+            if (direction == SlideDirection.Horizontal) return origin.SlideIn(spec, new Vector3(distance, 0f, 0f));
+            return origin.SlideIn(spec, new Vector3(0f, distance, 0f));
         }
     }
 }

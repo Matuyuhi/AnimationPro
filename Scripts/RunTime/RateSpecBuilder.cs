@@ -22,12 +22,12 @@ namespace AnimationPro.RunTime
             return Easings.Default(durationSec, waitSec);
         }
 
-        
+
         public RateSpec CircOut()
         {
             return Easings.CircOut(durationSec, waitSec);
         }
-        
+
         public RateSpec CircIn()
         {
             return Easings.CircOut(durationSec, waitSec);
@@ -38,12 +38,12 @@ namespace AnimationPro.RunTime
         {
             return Easings.BackIn(durationSec, waitSec);
         }
-        
+
         public RateSpec BackOut()
         {
             return Easings.BackOut(durationSec, waitSec);
         }
-        
+
         public RateSpec BackInOut()
         {
             return Easings.BackInOut(durationSec, waitSec);
@@ -54,6 +54,7 @@ namespace AnimationPro.RunTime
         {
             return Easings.BounceOut(durationSec, waitSec);
         }
+
         public RateSpec BounceIn()
         {
             return Easings.BounceIn(durationSec, waitSec);

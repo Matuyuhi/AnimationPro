@@ -1,70 +1,51 @@
 using System;
-using UnityEngine;
 using System.Collections;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace AnimationPro.RunTime
 {
-    public abstract class AnimationCore: MonoBehaviour
+    internal class AnimationCore : CoreListener
     {
-        private IAnimationListener listener;
-        protected float[] initAlpha;
-        protected Vector3 initPos;
-        protected Quaternion initQuaternion;
-        protected bool initialized;
 
-        public void Animation(ContentTransform a, [CanBeNull] AnimationListener animationListener = null)
+      
+
+        private readonly MonoBehaviour monoBehaviour;
+
+        public AnimationCore(MonoBehaviour monoBehaviour)
         {
-            listener = animationListener ?? null;
-            InitializeParam();
-            StartCoroutine(MoveToCoroutine(a));
+            this.monoBehaviour = monoBehaviour;
+        }
+
+        public Coroutine Animation(ContentTransform a)
+        {
+            return monoBehaviour.StartCoroutine(MoveToCoroutine(a));
         }
 
         private IEnumerator MoveToCoroutine(ContentTransform a)
         {
-            float time = 0f;
-            listener?.OnStart();
-            SetParam(a.OnInitialized());
+            var time = 0f;
+            onStart?.Invoke();
+            onSetParam(a.OnInitialized());
 
             while (time < a.MaxDuration)
             {
                 time += Time.deltaTime;
                 var update = a.OnUpdate(time);
-                OnUpdate(update);
-               
+                onUpdate(update);
+
                 yield return null;
             }
-
-            RevertInitializeParam();
-            listener?.OnFinished();
+            
+            onFinished?.Invoke();
         }
+    }
 
-        private void OnUpdate(TransitionSpec update)
-        {
-            if (update.Alpha.HasValue)
-            {
-                UpdateAlpha(update.Alpha.Value);
-            }
-
-            if (update.Rotate.HasValue)
-            {
-                UpdateRotate(update.Rotate.Value);
-            }
-
-            if (update.Position.HasValue)
-            {
-                UpdatePosition(update.Position.Value);
-            }
-
-        }
-
-        protected abstract void UpdateAlpha(float a);
-        protected abstract void UpdateRotate(Quaternion rot);
-        protected abstract void UpdatePosition(Vector3 pos);
-
-        protected abstract void SetParam(TransitionSpec a);
-
-        protected abstract void InitializeParam();
-        protected abstract void RevertInitializeParam();
+    internal abstract class CoreListener
+    {
+        public Action<TransitionSpec> onUpdate;
+        public Action<TransitionSpec> onSetParam;
+        public Action onFinished;
+        public Action onStart;
     }
 }

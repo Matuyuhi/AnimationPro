@@ -1,10 +1,10 @@
 namespace AnimationPro.RunTime
 {
+    /// <summary>
+    /// animation base class
+    /// </summary>
     public abstract class ContentTransform
     {
-        protected RateSpec RateSpec { get; set; }
-        public float MaxDuration { get; private set; }
-
         protected ContentTransform(RateSpec a)
         {
             RateSpec = a;
@@ -17,13 +17,16 @@ namespace AnimationPro.RunTime
             MaxDuration = maxDuration;
         }
 
+        protected RateSpec RateSpec { get; }
+        public float MaxDuration { get; private set; }
+
         public abstract TransitionSpec OnUpdate(float frame);
 
         public abstract TransitionSpec OnInitialized();
-        
+
         public static ContentTransform operator +(ContentTransform a, ContentTransform b)
         {
-            var composite = new CompositeContentTransform(new RateSpec(0f, 0f));
+            var composite = new CompositeContentTransform(new RateSpec());
             composite.AddAnimation(a);
             composite.AddAnimation(b);
             return composite;

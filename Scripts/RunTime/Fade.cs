@@ -1,17 +1,18 @@
-using UnityEngine;
-
 namespace AnimationPro.RunTime
 {
+    /// <summary>
+    /// Fade system in AnimationAPi
+    /// </summary>
     internal class FadeImpl : ContentTransform
     {
-        private float lastFrameRatio;
         private readonly bool isIn;
+        private float lastFrameRatio;
 
         public FadeImpl(RateSpec a, bool isIn) : base(a)
         {
             this.isIn = isIn;
         }
-        
+
         public override TransitionSpec OnInitialized()
         {
             return new TransitionSpec(alpha: isIn ? 0f : 1f);
