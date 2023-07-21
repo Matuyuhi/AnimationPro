@@ -1,4 +1,5 @@
 # Animation Pro
+![view](https://github.com/Matuyuhi/AnimationPro/assets/92073990/cd70e1b7-9630-4094-a000-4a9f8e8a54d4)
 
 AnimationPro is a UI and other animation system for Unity. It provides you with a simple API to add smooth animations to
 your project with ease.
