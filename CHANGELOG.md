@@ -9,8 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - update readme
 - refactor easing & animations
+- code style
 ---
-
+## [0.6.4]
+### Changed
+- update readme
+- refactor easing & animations
+- code style
+---
 ## [0.6.3]
 
 ### Addded
@@ -143,7 +149,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed security issue 1
 
-[Unreleased]: https://github.com/Matuyuhi/AnimationPro/compare/v0.6.3...HEAD
+[Unreleased]: https://github.com/Matuyuhi/AnimationPro/compare/v0.6.4...HEAD
 
 [0.1.0]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.1
 
@@ -160,3 +166,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.6.2]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.6.2
 
 [0.6.3]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.6.3
+
+[0.6.4]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v0.6.4
