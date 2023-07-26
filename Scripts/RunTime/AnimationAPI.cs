@@ -280,5 +280,23 @@ namespace AnimationPro.RunTime
             if (direction == SlideDirection.Horizontal) return origin.SlideIn(spec, new Vector3(distance, 0f, 0f));
             return origin.SlideIn(spec, new Vector3(0f, distance, 0f));
         }
+
+        public static ContentTransform ScaleIn(
+            this IAnimation origin,
+            float rate,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.ScaleTo(rate, false, spec);
+        }
+        
+        public static ContentTransform ScaleOut(
+            this IAnimation origin,
+            float rate,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.ScaleTo(rate, true, spec);
+        }
     }
 }

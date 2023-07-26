@@ -51,7 +51,6 @@ namespace AnimationPro.RunTime
 
         public override void OnStart()
         {
-            if (initialized) throw new ExternalException();
             InitializeParam();
             initialized = true;
             if (listener != null) listener.OnStart?.Invoke();
@@ -59,7 +58,6 @@ namespace AnimationPro.RunTime
 
         public override void OnFinished()
         {
-            if (!initialized) throw new ExternalException();
             RevertInitializeParam();
             listener?.OnFinished?.Invoke();
         }

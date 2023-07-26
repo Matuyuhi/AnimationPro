@@ -1,0 +1,16 @@
+{
+    "name": "com.matuyuhi.animationpro.Component",
+    "rootNamespace": "AnimationPro.Component",
+    "references": [
+        "com.matuyuhi.animationpro.RunTime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -23,6 +23,7 @@ namespace AnimationPro.RunTime
         private Graphic[] graphics;
         private float[] initAlpha;
         private Vector3 initPos;
+        private Vector3 initScale;
         private Quaternion initQuaternion;
         
         protected virtual void Awake()
@@ -75,7 +76,7 @@ namespace AnimationPro.RunTime
 
         private void UpdateScale(float scale)
         {
-            
+            rectTransform.localScale += new Vector3(scale, scale, 0f);
         }
         
         private void UpdatePosition(Vector3 pos)
@@ -91,19 +92,30 @@ namespace AnimationPro.RunTime
         public void OnSetParam(TransitionSpec a)
         {
             if (a.Alpha.HasValue)
+            {
                 foreach (var graphic in graphics)
                 {
                     var color = graphic.color;
                     color.a = a.Alpha.Value;
                     graphic.color = color;
                 }
+            }
 
-            if (a.Position.HasValue) rectTransform.localPosition = a.Position.Value;
+            if (a.Position.HasValue)
+            {
+                rectTransform.localPosition = a.Position.Value;
+            }
 
             if (a.Rotate.HasValue)
             {
                 var rot = a.Rotate.Value;
                 rectTransform.Rotate(rot.x, rot.y, rot.z);
+            }
+
+            if (a.Scale.HasValue)
+            {
+                var scale = a.Scale.Value;
+                rectTransform.localScale = new Vector3(scale, scale, 1f);
             }
         }
         
@@ -117,6 +129,8 @@ namespace AnimationPro.RunTime
             initPos = rectTransform.localPosition;
 
             initQuaternion = rectTransform.localRotation;
+
+            initScale = rectTransform.localScale;
         }
         
 
@@ -132,6 +146,7 @@ namespace AnimationPro.RunTime
 
             rectTransform.localPosition = initPos;
             rectTransform.localRotation = initQuaternion;
+            rectTransform.localScale = initScale;
         }
         
     }

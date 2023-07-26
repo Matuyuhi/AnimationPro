@@ -111,6 +111,25 @@ namespace AnimationPro.RunTime
             return new SlideImpl(a, targetPosition);
         }
 
+        public static ContentTransform ScaleTo(
+            this IAnimation origin,
+            float rate,
+            bool isIn,
+            [CanBeNull] RateSpec a
+        )
+        {
+            return new ScaleImpl(a, 1 - rate, isIn);
+        }
+        
+        public static ContentTransform ScaleFrom(
+            this IAnimation origin,
+            float rate,
+            [CanBeNull] RateSpec a
+        )
+        {
+            return new ScaleImpl(a, rate,　true);
+        }
+
         private static (RectTransform, Vector2) GetCommonSlideParts(this IAnimation origin)
         {
             var canvasRectTransform = origin.GetRootRect();

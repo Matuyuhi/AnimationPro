@@ -4,23 +4,24 @@
  * File: AnimatedSlidePointer.cs
  */
 
+using AnimationPro.RunTime;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace AnimationPro.RunTime
+namespace AnimationPro.Component
 {
-    [RequireComponent(typeof(RectTransform)), AddComponentMenu("AnimationPro/UI/SlideWithPointer")]
-    public class AnimatedSlidePointer : SwitchableAnimationBehaviour, IPointerEnterHandler, IPointerExitHandler
+    [RequireComponent(typeof(RectTransform)), AddComponentMenu("AnimationPro/UI/PopupWithPointer")]
+    public class PopupWithPointer : SwitchableAnimationBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public override ContentTransform EnterTransform { get; set; }
         public override ContentTransform ExitTransform { get; set; }
-        [SerializeField] private Vector2 distance = new(50f, 0f);
+        [SerializeField] private float rate = 1.2f;
         [SerializeField] private float delaySec = 0.3f;
 
         private void Start()
         {
-            EnterTransform = this.SlideTo(distance, Easings.QuartOut(delaySec));
-            ExitTransform = this.SlideFrom(distance, Easings.QuartIn(delaySec));
+            EnterTransform = this.ScaleOut(rate, Easings.QuartOut(delaySec));
+            ExitTransform = this.ScaleIn(2 - rate, Easings.QuartIn(delaySec));
         }
 
         public void OnPointerEnter(PointerEventData eventData)
