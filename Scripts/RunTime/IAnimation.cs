@@ -1,3 +1,9 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: IAnimation.cs
+ */
+
 using UnityEngine;
 
 namespace AnimationPro.RunTime

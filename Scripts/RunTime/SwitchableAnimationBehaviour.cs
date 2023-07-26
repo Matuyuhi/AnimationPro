@@ -1,7 +1,7 @@
 /*
  * Author: Matuyuhi
  * Date: 2023-07-26
- * File: SwitchableAnimation.cs
+ * File: SwitchableAnimationBehaviour.cs
  */
 
 namespace AnimationPro.RunTime
@@ -9,7 +9,7 @@ namespace AnimationPro.RunTime
     /// <summary>
     /// switch toggle animations state component
     /// </summary>
-    public abstract class SwitchableAnimationBehaviour : AnimationBase
+    public abstract class SwitchableAnimationBehaviour : AnimationBase, IAnimationCoreListener
     {
         private bool state;
         /// <summary>
@@ -41,7 +41,7 @@ namespace AnimationPro.RunTime
         protected override void Awake()
         {
             base.Awake();
-            core = new AnimationCore(this)
+            core = new AnimationCore(this, this)
             {
                 OnUpdate = OnUpdate,
                 OnStart =  OnStart,
@@ -68,13 +68,13 @@ namespace AnimationPro.RunTime
            
         }
 
-        private void OnStart()
+        public override void OnStart()
         {
             doAnimate = true;
         }
         
         // ReSharper disable Unity.PerformanceAnalysis
-        private void OnFinished()
+        public override void OnFinished()
         {
             doAnimate = false;
             if (!state)

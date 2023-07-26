@@ -1,3 +1,9 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: FadeImpl.cs
+ */
+
 namespace AnimationPro.RunTime
 {
     /// <summary>

@@ -16,8 +16,9 @@ namespace AnimationPro.RunTime
         public void Animation(ContentTransform transform, [CanBeNull] AnimationListener listener = null);
         public void OnCancel();
     }
+    
     [RequireComponent(typeof(RectTransform))]
-    public abstract class AnimationBehaviour : AnimationBase, IAnimationBehaviour
+    public abstract class AnimationBehaviour : AnimationBase, IAnimationBehaviour, IAnimationCoreListener
     {
         private AnimationCore core;
         
@@ -31,13 +32,7 @@ namespace AnimationPro.RunTime
         protected override void Awake()
         {
             base.Awake();
-            core = new AnimationCore(this)
-            {
-                OnUpdate = OnUpdate,
-                OnStart =  OnStart,
-                OnFinished = OnFinished,
-                OnSetParam = OnSetParam
-            };
+            core = new AnimationCore(this, this);
             initialized = false;
         }
 
@@ -54,7 +49,7 @@ namespace AnimationPro.RunTime
         }
 
 
-        private void OnStart()
+        public override void OnStart()
         {
             if (initialized) throw new ExternalException();
             InitializeParam();
@@ -62,7 +57,7 @@ namespace AnimationPro.RunTime
             if (listener != null) listener.OnStart?.Invoke();
         }
 
-        private void OnFinished()
+        public override void OnFinished()
         {
             if (!initialized) throw new ExternalException();
             RevertInitializeParam();

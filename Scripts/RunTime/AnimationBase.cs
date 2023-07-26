@@ -9,6 +9,13 @@ using UnityEngine.UI;
 
 namespace AnimationPro.RunTime
 {
+    internal interface IAnimationCoreListener
+    {
+        public void OnUpdate(TransitionSpec update);
+        public void OnStart();
+        public void OnFinished();
+        public void OnSetParam(TransitionSpec param);
+    }
     public class AnimationBase : MonoBehaviour, IAnimation
     {
 
@@ -40,8 +47,8 @@ namespace AnimationPro.RunTime
         {
             return GetComponentInParent<Canvas>()?.GetComponent<RectTransform>();
         }
-        
-        protected void OnUpdate(TransitionSpec update)
+
+        public void OnUpdate(TransitionSpec update)
         {
             if (update.Alpha.HasValue) UpdateAlpha(update.Alpha.Value);
 
@@ -51,7 +58,11 @@ namespace AnimationPro.RunTime
             
             if (update.Scale.HasValue) UpdateScale(update.Scale.Value);
         }
-        
+
+        public virtual void OnStart() { }
+
+        public virtual void OnFinished() { }
+
         private void UpdateAlpha(float a)
         {
             foreach (var graphic in graphics)
@@ -77,7 +88,7 @@ namespace AnimationPro.RunTime
             rectTransform.Rotate(rot.x, rot.y, rot.z);
         }
 
-        protected void OnSetParam(TransitionSpec a)
+        public void OnSetParam(TransitionSpec a)
         {
             if (a.Alpha.HasValue)
                 foreach (var graphic in graphics)
@@ -98,8 +109,6 @@ namespace AnimationPro.RunTime
         
         protected void InitializeParam()
         {
-    
-
             for (var i = 0; i < graphics.Length; i++)
             {
                 initAlpha[i] = graphics[i].color.a;
@@ -108,16 +117,12 @@ namespace AnimationPro.RunTime
             initPos = rectTransform.localPosition;
 
             initQuaternion = rectTransform.localRotation;
-
-
         }
         
 
 
         protected void RevertInitializeParam()
         {
-          
-
             for (var i = 0; i < graphics.Length; i++)
             {
                 var color = graphics[i].color;

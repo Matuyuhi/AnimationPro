@@ -1,3 +1,9 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: RateSpecBuilder.cs
+ */
+
 namespace AnimationPro.RunTime
 {
     public class RateSpecBuilder

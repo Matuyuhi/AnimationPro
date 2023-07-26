@@ -1,4 +1,9 @@
-//// edit by matuyuhi
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: AnimationAPI.cs
+ */
+
 using JetBrains.Annotations;
 using UnityEngine;
 

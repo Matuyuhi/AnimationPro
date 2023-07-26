@@ -1,15 +1,22 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: AnimationCore.cs
+ */
+
 using System;
 using System.Collections;
 using UnityEngine;
 
 namespace AnimationPro.RunTime
 {
-    internal class AnimationCore : CoreListener
+    internal class AnimationCore: AnimationCoreListenerAction
     {
 
         private readonly MonoBehaviour monoBehaviour;
+        private IAnimationCoreListener animationCoreListenerImplementation;
 
-        public AnimationCore(MonoBehaviour monoBehaviour)
+        public AnimationCore(MonoBehaviour monoBehaviour, IAnimationCoreListener listener) : base(listener)
         {
             this.monoBehaviour = monoBehaviour;
         }
@@ -23,7 +30,7 @@ namespace AnimationPro.RunTime
         private IEnumerator MoveToCoroutine(ContentTransform a)
         {
             var time = 0f;
-            OnStart?.Invoke();
+            OnStart();
             OnSetParam(a.OnInitialized());
 
             while (time < a.MaxDuration)
@@ -35,15 +42,23 @@ namespace AnimationPro.RunTime
                 yield return null;
             }
             
-            OnFinished?.Invoke();
+            OnFinished();
         }
     }
-
-    internal abstract class CoreListener
+    internal class AnimationCoreListenerAction
     {
-        public Action<TransitionSpec> OnUpdate;
-        public Action<TransitionSpec> OnSetParam;
-        public Action OnFinished;
-        public Action OnStart;
+        public Action<TransitionSpec> OnUpdate { get; set; }
+        public Action<TransitionSpec> OnSetParam { get; set; }
+        public Action OnFinished { get; set; }
+        public Action OnStart { get; set; }
+
+        public AnimationCoreListenerAction(IAnimationCoreListener listener)
+        {
+            // Bind the interface methods to our Action delegates
+            OnUpdate = listener.OnUpdate;
+            OnSetParam = listener.OnSetParam;
+            OnFinished = listener.OnFinished;
+            OnStart = listener.OnStart;
+        }
     }
 }

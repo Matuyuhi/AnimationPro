@@ -1,3 +1,9 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: Tween.cs
+ */
+
 using System;
 using JetBrains.Annotations;
 using UnityEngine;

@@ -8,8 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - switching state with animation
+- add name in scripts
 ### Fixed
 - slide from API fix
+- refactor interfaces
+### Changed
+- common parts of the AnimationBase class
 
 ---
 ## [1.0.0]

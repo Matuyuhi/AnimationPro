@@ -1,3 +1,9 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: RateSpec.cs
+ */
+
 namespace AnimationPro.RunTime
 {
     internal delegate float RateCall(float rate);

@@ -1,3 +1,9 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: CompositeContentTransform.cs
+ */
+
 using System.Collections.Generic;
 
 namespace AnimationPro.RunTime
