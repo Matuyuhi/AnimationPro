@@ -10,11 +10,9 @@ namespace AnimationPro.RunTime
     {
         public void Animation(ContentTransform transform, [CanBeNull] AnimationListener listener = null);
         public void OnCancel();
-        public Rect GetRect();
-        public Vector3 GetLocalPosition();
     }
     [RequireComponent(typeof(RectTransform))]
-    public abstract class AnimationBehaviour : MonoBehaviour, IAnimationBehaviour
+    public abstract class AnimationBehaviour : MonoBehaviour, IAnimationBehaviour, IAnimation
     {
         private AnimationCore core;
 
@@ -31,7 +29,7 @@ namespace AnimationPro.RunTime
 
         [CanBeNull] private AnimationListener listener;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             core = new AnimationCore(this)
             {
@@ -69,7 +67,11 @@ namespace AnimationPro.RunTime
         {
             return rectTransform.localPosition;
         }
-        
+
+        public RectTransform GetRootRect()
+        {
+            return GetComponentInParent<Canvas>()?.GetComponent<RectTransform>();
+        }
         
         private void OnUpdate(TransitionSpec update)
         {

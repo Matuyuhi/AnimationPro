@@ -61,7 +61,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform FadeIn(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             RateSpec spec = null
         )
         {
@@ -75,7 +75,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform FadeOut(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             RateSpec spec = null
         )
         {
@@ -90,7 +90,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideInHorizontal(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             [CanBeNull] RateSpec spec = null
         )
         {
@@ -105,7 +105,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideInHorizontal(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             DirectionHorizontal direction,
             [CanBeNull] RateSpec spec = null
         )
@@ -120,7 +120,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideOutHorizontal(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             [CanBeNull] RateSpec spec= null
         )
         {
@@ -135,7 +135,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideOutHorizontal(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             DirectionHorizontal direction,
             [CanBeNull] RateSpec spec= null
         )
@@ -151,7 +151,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideInVertical(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             [CanBeNull] RateSpec spec= null
         )
         {
@@ -166,7 +166,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideInVertical(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             DirectionVertical direction,
             [CanBeNull] RateSpec spec= null
         )
@@ -181,7 +181,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideOutVertical(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             [CanBeNull] RateSpec spec= null
         )
         {
@@ -196,7 +196,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the FadeIn animation movement.</returns>
         public static ContentTransform SlideOutVertical(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             DirectionVertical direction,
             [CanBeNull] RateSpec spec= null
         )
@@ -213,7 +213,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the SlideTo animation movement.</returns>
         public static ContentTransform SlideTo(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             Vector2 distance,
             [CanBeNull] RateSpec spec= null
         )
@@ -230,7 +230,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the SlideTo animation movement.</returns>
         public static ContentTransform SlideTo(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             float distance,
             SlideDirection direction,
             [CanBeNull] RateSpec spec= null
@@ -249,7 +249,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the SlideFrom animation movement.</returns>
         public static ContentTransform SlideFrom(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             Vector2 distance,
             [CanBeNull] RateSpec spec= null
         )
@@ -266,7 +266,7 @@ namespace AnimationPro.RunTime
         /// <param name="spec">Easing function to define animation's pace over time.</param>
         /// <returns>Returns the SlideFrom animation movement.</returns>
         public static ContentTransform SlideFrom(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             float distance,
             SlideDirection direction,
             [CanBeNull] RateSpec spec= null

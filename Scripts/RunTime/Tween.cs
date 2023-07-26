@@ -18,17 +18,17 @@ namespace AnimationPro.RunTime
         }
 
         public static ContentTransform SlideIn(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             [CanBeNull] RateSpec a,
             Vector3 distance
         )
         {
             a ??= DefaultSpec;
-            return new SlideImpl(a, origin.GetLocalPosition() - distance, distance);
+            return new SlideImpl(a, -distance, origin.GetLocalPosition() + distance);
         }
 
         public static ContentTransform SlideOut(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             [CanBeNull] RateSpec a,
             Vector3 distance
         )
@@ -38,7 +38,7 @@ namespace AnimationPro.RunTime
         }
 
         public static ContentTransform SlideHorizontal(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             bool isIn,
             [CanBeNull] RateSpec a,
             AnimationAPI.DirectionHorizontal direction = AnimationAPI.DirectionHorizontal.Right
@@ -72,7 +72,7 @@ namespace AnimationPro.RunTime
         }
 
         public static ContentTransform SlideVertical(
-            this AnimationBehaviour origin,
+            this IAnimation origin,
             bool isIn,
             [CanBeNull] RateSpec a,
             AnimationAPI.DirectionVertical direction = AnimationAPI.DirectionVertical.Up
@@ -105,9 +105,9 @@ namespace AnimationPro.RunTime
             return new SlideImpl(a, targetPosition);
         }
 
-        private static (RectTransform, Vector2) GetCommonSlideParts(this AnimationBehaviour origin)
+        private static (RectTransform, Vector2) GetCommonSlideParts(this IAnimation origin)
         {
-            var canvasRectTransform = origin.GetComponentInParent<Canvas>()?.GetComponent<RectTransform>();
+            var canvasRectTransform = origin.GetRootRect();
 
             if (canvasRectTransform == null) throw new Exception("UITransform must be a child of a Canvas.");
 
