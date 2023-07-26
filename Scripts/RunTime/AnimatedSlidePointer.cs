@@ -1,3 +1,9 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: AnimatedSlidePointer.cs
+ */
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 

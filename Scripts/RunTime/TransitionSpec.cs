@@ -7,17 +7,21 @@ namespace AnimationPro.RunTime
         public TransitionSpec(
             Quaternion? rotate = null,
             Vector3? position = null,
-            float? alpha = null
+            float? alpha = null,
+            float? scale = null
         )
         {
             Position = position;
             Rotate = rotate;
             Alpha = alpha;
+            Scale = scale;
         }
 
         public Quaternion? Rotate { get; }
         public Vector3? Position { get; }
         public float? Alpha { get; }
+        
+        public float? Scale { get; }
     }
 
     internal static class TransitionSpecExtensions
@@ -30,7 +34,8 @@ namespace AnimationPro.RunTime
             return new TransitionSpec(
                 NullableSum(a.Rotate, b.Rotate),
                 NullableSum(a.Position, b.Position),
-                NullableSum(a.Alpha, b.Alpha)
+                NullableSum(a.Alpha, b.Alpha),
+                NullableSum(a.Scale, a.Scale)
             );
         }
 

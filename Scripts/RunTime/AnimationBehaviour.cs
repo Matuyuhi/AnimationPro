@@ -1,7 +1,12 @@
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: AnimationBehaviour.cs
+ */
+
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 namespace AnimationPro.RunTime
@@ -12,16 +17,10 @@ namespace AnimationPro.RunTime
         public void OnCancel();
     }
     [RequireComponent(typeof(RectTransform))]
-    public abstract class AnimationBehaviour : MonoBehaviour, IAnimationBehaviour, IAnimation
+    public abstract class AnimationBehaviour : AnimationBase, IAnimationBehaviour
     {
         private AnimationCore core;
-
         
-        private RectTransform rectTransform;
-        private Graphic[] graphics;
-        private float[] initAlpha;
-        private Vector3 initPos;
-        private Quaternion initQuaternion;
         
         private bool initialized;
 
@@ -29,8 +28,9 @@ namespace AnimationPro.RunTime
 
         [CanBeNull] private AnimationListener listener;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             core = new AnimationCore(this)
             {
                 OnUpdate = OnUpdate,
@@ -38,11 +38,6 @@ namespace AnimationPro.RunTime
                 OnFinished = OnFinished,
                 OnSetParam = OnSetParam
             };
-
-            rectTransform = GetComponent<RectTransform>();
-
-            graphics = GetComponentsInChildren<Graphic>();
-            initAlpha = new float[graphics.Length];
             initialized = false;
         }
 
@@ -57,115 +52,21 @@ namespace AnimationPro.RunTime
             StopCoroutine(coroutine);
             listener?.OnCancel?.Invoke();
         }
-        
-        public Rect GetRect()
-        {
-            return rectTransform.rect;
-        }
 
-        public Vector3 GetLocalPosition()
-        {
-            return rectTransform.localPosition;
-        }
-
-        public RectTransform GetRootRect()
-        {
-            return GetComponentInParent<Canvas>()?.GetComponent<RectTransform>();
-        }
-        
-        private void OnUpdate(TransitionSpec update)
-        {
-            if (update.Alpha.HasValue) UpdateAlpha(update.Alpha.Value);
-
-            if (update.Rotate.HasValue) UpdateRotate(update.Rotate.Value);
-
-            if (update.Position.HasValue) UpdatePosition(update.Position.Value);
-        }
 
         private void OnStart()
         {
+            if (initialized) throw new ExternalException();
             InitializeParam();
+            initialized = true;
             if (listener != null) listener.OnStart?.Invoke();
         }
 
         private void OnFinished()
         {
+            if (!initialized) throw new ExternalException();
             RevertInitializeParam();
             listener?.OnFinished?.Invoke();
-        }
-
-        private void UpdateAlpha(float a)
-        {
-            foreach (var graphic in graphics)
-            {
-                var color = graphic.color;
-                color.a += a;
-                if (color.a is <= 1.0f and >= 0.0f) graphic.color = color;
-            }
-        }
-        
-        private void InitializeParam()
-        {
-            if (initialized) throw new ExternalException();
-
-            for (var i = 0; i < graphics.Length; i++)
-            {
-                initAlpha[i] = graphics[i].color.a;
-            }
-
-            initPos = rectTransform.localPosition;
-
-            initQuaternion = rectTransform.localRotation;
-
-            initialized = true;
-        }
-        
-
-
-        private void RevertInitializeParam()
-        {
-            if (!initialized) throw new ExternalException();
-
-            for (var i = 0; i < graphics.Length; i++)
-            {
-                var color = graphics[i].color;
-                color.a += initAlpha[i];
-                graphics[i].color = color;
-            }
-
-            rectTransform.localPosition = initPos;
-            rectTransform.localRotation = initQuaternion;
-
-            initialized = false;
-        }
-
-        private void UpdatePosition(Vector3 pos)
-        {
-            rectTransform.localPosition += pos;
-        }
-
-        private void UpdateRotate(Quaternion rot)
-        {
-            rectTransform.Rotate(rot.x, rot.y, rot.z);
-        }
-
-        private void OnSetParam(TransitionSpec a)
-        {
-            if (a.Alpha.HasValue)
-                foreach (var graphic in graphics)
-                {
-                    var color = graphic.color;
-                    color.a = a.Alpha.Value;
-                    graphic.color = color;
-                }
-
-            if (a.Position.HasValue) rectTransform.localPosition = a.Position.Value;
-
-            if (a.Rotate.HasValue)
-            {
-                var rot = a.Rotate.Value;
-                rectTransform.Rotate(rot.x, rot.y, rot.z);
-            }
         }
     }
 }
