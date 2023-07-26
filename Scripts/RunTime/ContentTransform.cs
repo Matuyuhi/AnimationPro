@@ -20,6 +20,8 @@ namespace AnimationPro.RunTime
         protected RateSpec RateSpec { get; }
         public float MaxDuration { get; private set; }
 
+        public abstract void Init();
+
         public abstract TransitionSpec OnUpdate(float frame);
 
         public abstract TransitionSpec OnInitialized();

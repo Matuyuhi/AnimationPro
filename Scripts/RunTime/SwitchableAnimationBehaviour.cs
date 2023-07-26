@@ -1,19 +1,38 @@
-using System.Runtime.InteropServices;
-using JetBrains.Annotations;
+/*
+ * Author: Matuyuhi
+ * Date: 2023-07-26
+ * File: SwitchableAnimation.cs
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
-
 namespace AnimationPro.RunTime
 {
-    internal interface IAnimationBehaviour
+    /// <summary>
+    /// switch toggle animations state component
+    /// </summary>
+    public abstract class SwitchableAnimationBehaviour : MonoBehaviour, IAnimation
     {
-        public void Animation(ContentTransform transform, [CanBeNull] AnimationListener listener = null);
-        public void OnCancel();
-    }
-    [RequireComponent(typeof(RectTransform))]
-    public abstract class AnimationBehaviour : MonoBehaviour, IAnimationBehaviour, IAnimation
-    {
+        private bool state;
+        /// <summary>
+        /// animation started if this state changed
+        /// </summary>
+        public bool State
+        {
+            get => state;
+            set
+            {
+                if (value == state) return;
+                state = value;
+                DidStateChange();
+            }
+        }
+
+        public abstract ContentTransform EnterTransform { get; set; }
+        
+        public abstract ContentTransform ExitTransform { get; set; }
+        
+        
         private AnimationCore core;
 
         
@@ -22,15 +41,15 @@ namespace AnimationPro.RunTime
         private float[] initAlpha;
         private Vector3 initPos;
         private Quaternion initQuaternion;
-        
-        private bool initialized;
 
-        private Coroutine coroutine;
+        private bool doAnimate;
 
-        [CanBeNull] private AnimationListener listener;
+        private bool waitNextState;
+
 
         protected virtual void Awake()
         {
+
             core = new AnimationCore(this)
             {
                 OnUpdate = OnUpdate,
@@ -43,21 +62,26 @@ namespace AnimationPro.RunTime
 
             graphics = GetComponentsInChildren<Graphic>();
             initAlpha = new float[graphics.Length];
-            initialized = false;
+            InitializeParam();
         }
 
-        public void Animation(ContentTransform a, AnimationListener animationListener = null)
+        // ReSharper disable Unity.PerformanceAnalysis
+        private void DidStateChange()
         {
-            listener = animationListener;
-            coroutine = core.Animation(a);
+            if (!doAnimate)
+            {
+                if ((state ? EnterTransform : ExitTransform) != null)
+                {
+                    core.Animation(state ? EnterTransform : ExitTransform);
+                }
+            }
+            else
+            {
+                waitNextState = true;
+            }
+           
         }
 
-        public void OnCancel()
-        {
-            StopCoroutine(coroutine);
-            listener?.OnCancel?.Invoke();
-        }
-        
         public Rect GetRect()
         {
             return rectTransform.rect;
@@ -84,14 +108,23 @@ namespace AnimationPro.RunTime
 
         private void OnStart()
         {
-            InitializeParam();
-            if (listener != null) listener.OnStart?.Invoke();
+            doAnimate = true;
         }
-
+        
+        // ReSharper disable Unity.PerformanceAnalysis
         private void OnFinished()
         {
-            RevertInitializeParam();
-            listener?.OnFinished?.Invoke();
+            doAnimate = false;
+            if (!state)
+            {
+                RevertInitializeParam();
+            }
+
+            if (waitNextState)
+            {
+                waitNextState = false;
+                DidStateChange();
+            }
         }
 
         private void UpdateAlpha(float a)
@@ -106,8 +139,6 @@ namespace AnimationPro.RunTime
         
         private void InitializeParam()
         {
-            if (initialized) throw new ExternalException();
-
             for (var i = 0; i < graphics.Length; i++)
             {
                 initAlpha[i] = graphics[i].color.a;
@@ -116,16 +147,12 @@ namespace AnimationPro.RunTime
             initPos = rectTransform.localPosition;
 
             initQuaternion = rectTransform.localRotation;
-
-            initialized = true;
         }
         
 
 
         private void RevertInitializeParam()
         {
-            if (!initialized) throw new ExternalException();
-
             for (var i = 0; i < graphics.Length; i++)
             {
                 var color = graphics[i].color;
@@ -135,8 +162,6 @@ namespace AnimationPro.RunTime
 
             rectTransform.localPosition = initPos;
             rectTransform.localRotation = initQuaternion;
-
-            initialized = false;
         }
 
         private void UpdatePosition(Vector3 pos)
@@ -152,14 +177,19 @@ namespace AnimationPro.RunTime
         private void OnSetParam(TransitionSpec a)
         {
             if (a.Alpha.HasValue)
+            {
                 foreach (var graphic in graphics)
                 {
                     var color = graphic.color;
                     color.a = a.Alpha.Value;
                     graphic.color = color;
                 }
+            }
 
-            if (a.Position.HasValue) rectTransform.localPosition = a.Position.Value;
+            if (a.Position.HasValue)
+            {
+                rectTransform.localPosition = a.Position.Value;
+            }
 
             if (a.Rotate.HasValue)
             {

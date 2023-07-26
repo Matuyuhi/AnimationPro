@@ -1,14 +1,11 @@
 using System;
 using System.Collections;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace AnimationPro.RunTime
 {
     internal class AnimationCore : CoreListener
     {
-
-      
 
         private readonly MonoBehaviour monoBehaviour;
 
@@ -19,33 +16,34 @@ namespace AnimationPro.RunTime
 
         public Coroutine Animation(ContentTransform a)
         {
+            a.Init();
             return monoBehaviour.StartCoroutine(MoveToCoroutine(a));
         }
 
         private IEnumerator MoveToCoroutine(ContentTransform a)
         {
             var time = 0f;
-            onStart?.Invoke();
-            onSetParam(a.OnInitialized());
+            OnStart?.Invoke();
+            OnSetParam(a.OnInitialized());
 
             while (time < a.MaxDuration)
             {
                 time += Time.deltaTime;
                 var update = a.OnUpdate(time);
-                onUpdate(update);
+                OnUpdate(update);
 
                 yield return null;
             }
             
-            onFinished?.Invoke();
+            OnFinished?.Invoke();
         }
     }
 
     internal abstract class CoreListener
     {
-        public Action<TransitionSpec> onUpdate;
-        public Action<TransitionSpec> onSetParam;
-        public Action onFinished;
-        public Action onStart;
+        public Action<TransitionSpec> OnUpdate;
+        public Action<TransitionSpec> OnSetParam;
+        public Action OnFinished;
+        public Action OnStart;
     }
 }

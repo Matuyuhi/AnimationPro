@@ -14,6 +14,11 @@ namespace AnimationPro.RunTime
             this.distance = distance;
         }
 
+        public override void Init()
+        {
+            lastFrameRatio = 0f;
+        }
+
         public override TransitionSpec OnInitialized()
         {
             return new TransitionSpec(position: initPos.HasValue ? initPos.Value : null);

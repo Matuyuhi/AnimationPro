@@ -16,18 +16,31 @@ namespace AnimationPro.RunTime
             if (animation.MaxDuration > MaxDuration) SetMaxDuration(animation.MaxDuration);
         }
 
+        public override void Init()
+        {
+            foreach (var animation in animations)
+            {
+                animation.Init();
+            }
+        }
+
         public override TransitionSpec OnInitialized()
         {
             var result = new TransitionSpec();
-            foreach (var animation in animations) result = result.CombineWith(animation.OnInitialized());
+            foreach (var animation in animations)
+            {
+                result = result.CombineWith(animation.OnInitialized());
+            }
             return result;
         }
 
         public override TransitionSpec OnUpdate(float frame)
         {
             var result = new TransitionSpec();
-            foreach (var animation in animations) result = result.CombineWith(animation.OnUpdate(frame));
-
+            foreach (var animation in animations)
+            {
+                result = result.CombineWith(animation.OnUpdate(frame));
+            }
             return result;
         }
 
