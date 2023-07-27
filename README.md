@@ -72,6 +72,9 @@ currently [![NPM Package](https://img.shields.io/npm/v/com.matuyuhi.animationpro
 
 ## Usage
 
+### [Component](./Components.md)
+Simple animations that can be easily used by adding them to components
+
 ### [Animations Document file](./ANIMATIONS.md)
 
 Here's a basic example of how to use AnimationPro:

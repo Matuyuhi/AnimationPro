@@ -71,6 +71,9 @@ Unityがサポートしているプロトコルについての詳細は、[Git U
 
 ## Usage
 
+### [Component](./Components.md)
+コンポーネントに追加することで簡単に使用できるシンプルなアニメーション
+
 ### [アニメーション一覧](./ANIMATIONS.md)
 
 AnimationProの基本的な使用例は以下の通りです：
