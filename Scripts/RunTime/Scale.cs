@@ -19,7 +19,6 @@ namespace AnimationPro.RunTime
 
         public ScaleImpl(RateSpec a, float targetScale, bool isIn) : base(a)
         {
-            Debug.Log(targetScale);
             this.isIn = isIn;
             this.targetScale = targetScale;
         }

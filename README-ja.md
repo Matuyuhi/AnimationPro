@@ -87,22 +87,22 @@ AnimationProの基本的な使用例は以下の通りです：
 ``` csharp
 public class SampleAnimation : AnimationBehaviour
 {
-    // ボタンをクリックした時に呼ばれる関数
-    public void OnClick()
-    {
-        // 1秒かけてスライドしながらフェードアウトする
-        Animation(
-            this.SlideOutHorizontal(AnimationAPI.DirectionHorizontal.Left, Easings.QuartOut(1f)) +
-            this.FadeOut(Easings.QuartOut(1f)),
-            new AnimationListener()
-            {
-                OnFinished =
-                {
-                    // 終了した時に呼ばれる
-                }
-            }
-        );
-    }
+  // onClick method attach button
+  public void OnClick()
+  {
+    Animation(
+      this.SlideOutHorizontal(AnimationAPI.DirectionHorizontal.Right, Easings.CircIn(0.8f)) +
+      this.FadeOut(Easings.CircIn(0.5f, 0.2f)),
+      new AnimationListener()
+      {
+        OnFinished = () =>
+        {
+            gameObject.SetActive(false);
+            // imp animation finished callback
+        }
+      }
+    );
+  }
 }
 ```
 

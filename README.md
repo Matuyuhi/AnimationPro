@@ -88,23 +88,22 @@ Here's a basic example of how to use AnimationPro:
 ``` csharp
 public class SampleAnimation : AnimationBehaviour
 {
-    // onClick method attach button
-    public void OnClick()
-    {
-        // Slide out screen left over & fade out
-        // to 1 second
-        Animation(
-            this.SlideOutHorizontal(AnimationAPI.DirectionHorizontal.Left, Easings.QuartOut(1f)) +
-            this.FadeOut(Easings.QuartOut(1f)),
-            new AnimationListener()
-            {
-                OnFinished =
-                {
-                    // imp animation finished callback
-                }
-            }
-        );
-    }
+  // onClick method attach button
+  public void OnClick()
+  {
+    Animation(
+      this.SlideOutHorizontal(AnimationAPI.DirectionHorizontal.Right, Easings.CircIn(0.8f)) +
+      this.FadeOut(Easings.CircIn(0.5f, 0.2f)),
+      new AnimationListener()
+      {
+        OnFinished = () =>
+        {
+            gameObject.SetActive(false);
+            // imp animation finished callback
+        }
+      }
+    );
+  }
 }
 ```
 
