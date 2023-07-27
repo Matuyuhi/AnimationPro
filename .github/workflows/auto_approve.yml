@@ -1,4 +1,5 @@
 name: Auto Approve
+
 on:
   pull_request:
     types:
@@ -20,3 +21,4 @@ jobs:
         uses: hmarr/auto-approve-action@v3
         with:
           github-token: "${{ secrets.BOT_GITHUB_TOKEN }}"
+
