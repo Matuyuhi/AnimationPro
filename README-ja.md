@@ -83,7 +83,7 @@ Unityがサポートしているプロトコルについての詳細は、[Git U
 ### [アニメーション一覧](./ANIMATIONS.md)
 
 AnimationProの基本的な使用例は以下の通りです：
-
+<img src="https://github.com/Matuyuhi/AnimationPro/assets/92073990/9d79f6ce-39f2-46fa-875e-f5b1f2f125cb" width="70%"/>
 ``` csharp
 public class SampleAnimation : AnimationBehaviour
 {
