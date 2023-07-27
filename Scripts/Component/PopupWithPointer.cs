@@ -1,7 +1,7 @@
 /*
  * Author: Matuyuhi
  * Date: 2023-07-26
- * File: AnimatedSlidePointer.cs
+ * File: SlideWithPointer.cs
  */
 
 using AnimationPro.RunTime;
