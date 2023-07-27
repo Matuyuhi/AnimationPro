@@ -6,6 +6,7 @@ on:
       - reopened
       - synchronize
       - ready_for_review
+
 jobs:
   approve:
     if: |
@@ -15,4 +16,7 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - uses: hmarr/auto-approve-action@v3
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v3
+        with:
+          github-token: "${{ secrets.BOT_GITHUB_TOKEN }}"
