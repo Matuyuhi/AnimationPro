@@ -73,7 +73,13 @@ currently [![NPM Package](https://img.shields.io/npm/v/com.matuyuhi.animationpro
 ## Usage
 
 ### [Component](./Components.md)
-Simple animations that can be easily used by adding them to components
+Simple animations that can be easily used by adding them to components  
+- In Playing
+<img src="https://github.com/Matuyuhi/AnimationPro/assets/92073990/4b81bb92-b1d1-4214-988c-88b763d182a2" width="70%"/>
+
+- In Setting
+<img src="https://github.com/Matuyuhi/AnimationPro/assets/92073990/131da158-6f77-49b6-a22c-8e7592c73f25" width="70%"/>  
+
 
 ### [Animations Document file](./ANIMATIONS.md)
 
