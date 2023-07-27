@@ -73,6 +73,12 @@ Unityがサポートしているプロトコルについての詳細は、[Git U
 
 ### [Component](./Components.md)
 コンポーネントに追加することで簡単に使用できるシンプルなアニメーション
+- In Playing
+<img src="https://github.com/Matuyuhi/AnimationPro/assets/92073990/4b81bb92-b1d1-4214-988c-88b763d182a2" width="70%"/>
+
+- In Setting
+<img src="https://github.com/Matuyuhi/AnimationPro/assets/92073990/131da158-6f77-49b6-a22c-8e7592c73f25" width="70%"/>  
+
 
 ### [アニメーション一覧](./ANIMATIONS.md)
 
