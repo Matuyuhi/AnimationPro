@@ -41,7 +41,7 @@ namespace AnimationPro.RunTime
                 NullableSum(a.Rotate, b.Rotate),
                 NullableSum(a.Position, b.Position),
                 NullableSum(a.Alpha, b.Alpha),
-                NullableSum(a.Scale, a.Scale)
+                NullableSum(a.Scale, b.Scale)
             );
         }
 
