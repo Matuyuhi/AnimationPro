@@ -25,6 +25,8 @@ namespace AnimationPro.RunTime
         
         private bool initialized;
 
+        public bool IsAnimate => coroutine != null;
+
         private Coroutine coroutine;
 
         [CanBeNull] private AnimationListener listener;
@@ -44,8 +46,11 @@ namespace AnimationPro.RunTime
 
         public void OnCancel()
         {
-            StopCoroutine(coroutine);
-            listener?.OnCancel?.Invoke();
+            if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+                listener?.OnCancel?.Invoke();
+            }
         }
 
 
@@ -58,6 +63,7 @@ namespace AnimationPro.RunTime
 
         public override void OnFinished()
         {
+            coroutine = null;
             RevertInitializeParam();
             listener?.OnFinished?.Invoke();
         }
