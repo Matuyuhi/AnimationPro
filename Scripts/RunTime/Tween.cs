@@ -1,6 +1,6 @@
 /*
  * Author: Matuyuhi
- * Date: 2023-07-26
+ * Date: 2023-07-26 (Update: 2023-08-30)
  * File: Tween.cs
  */
 
@@ -118,7 +118,19 @@ namespace AnimationPro.RunTime
             [CanBeNull] RateSpec a
         )
         {
-            return new ScaleImpl(a, 1 - rate, isIn);
+            return new ScaleImpl(a, new Vector2(1 - rate, 1 - rate), isIn);
+        }
+        
+        public static ContentTransform ScaleTo(
+            this IAnimation origin,
+            Vector2 rate,
+            bool isIn,
+            [CanBeNull] RateSpec a
+        )
+        {
+            rate.x = 1 - rate.x;
+            rate.y = 1 - rate.y;
+            return new ScaleImpl(a, rate, isIn);
         }
         
         public static ContentTransform ScaleFrom(
@@ -127,7 +139,7 @@ namespace AnimationPro.RunTime
             [CanBeNull] RateSpec a
         )
         {
-            return new ScaleImpl(a, rate,　true);
+            return new ScaleImpl(a, new Vector2(rate, rate),　true);
         }
 
         private static (RectTransform, Vector2) GetCommonSlideParts(this IAnimation origin)

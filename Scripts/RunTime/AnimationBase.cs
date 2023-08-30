@@ -1,6 +1,6 @@
 /*
  * Author: Matuyuhi
- * Date: 2023-07-26
+ * Date: 2023-07-26 (Update: 2023-08-30)
  * File: AnimationBase.cs
  */
 
@@ -74,9 +74,9 @@ namespace AnimationPro.RunTime
             }
         }
 
-        private void UpdateScale(float scale)
+        private void UpdateScale(Vector2 scale)
         {
-            rectTransform.localScale += new Vector3(scale, scale, 0f);
+            rectTransform.localScale += new Vector3(scale.x, scale.y, 0f);
         }
         
         private void UpdatePosition(Vector3 pos)
@@ -115,7 +115,7 @@ namespace AnimationPro.RunTime
             if (a.Scale.HasValue)
             {
                 var scale = a.Scale.Value;
-                rectTransform.localScale = new Vector3(scale, scale, 1f);
+                rectTransform.localScale = new Vector3(scale.x, scale.y, 1f);
             }
         }
         

@@ -1,6 +1,6 @@
 /*
  * Author: Matuyuhi
- * Date: 2023-07-26
+ * Date: 2023-07-26 (Update: 2023-08-30)
  * File: TransitionSpec.cs
  */
 
@@ -14,7 +14,7 @@ namespace AnimationPro.RunTime
             Quaternion? rotate = null,
             Vector3? position = null,
             float? alpha = null,
-            float? scale = null
+            Vector2? scale = null
         )
         {
             Position = position;
@@ -27,7 +27,7 @@ namespace AnimationPro.RunTime
         public Vector3? Position { get; }
         public float? Alpha { get; }
         
-        public float? Scale { get; }
+        public Vector2? Scale { get; }
     }
 
     internal static class TransitionSpecExtensions

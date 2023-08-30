@@ -1,6 +1,6 @@
 /*
  * Author: Matuyuhi
- * Date: 2023-07-26
+ * Date: 2023-07-26 (Update: 2023-08-30)
  * File: ScaleImpl.cs
  */
 
@@ -13,11 +13,11 @@ namespace AnimationPro.RunTime
     /// </summary>
     internal class ScaleImpl : ContentTransform
     {
-        private readonly float targetScale;
+        private readonly Vector2 targetScale;
         private readonly bool isIn;
         private float lastFrameRatio;
 
-        public ScaleImpl(RateSpec a, float targetScale, bool isIn) : base(a)
+        public ScaleImpl(RateSpec a, Vector2 targetScale, bool isIn) : base(a)
         {
             this.isIn = isIn;
             this.targetScale = targetScale;
@@ -30,7 +30,10 @@ namespace AnimationPro.RunTime
 
         public override TransitionSpec OnInitialized()
         {
-            return new TransitionSpec(scale: isIn ? 1 - targetScale : null);
+            var scale = targetScale;
+            scale.x = 1 - scale.x;
+            scale.y = 1 - scale.y;
+            return new TransitionSpec(scale: isIn ? scale : null);
         }
 
         public override TransitionSpec OnUpdate(float frame)

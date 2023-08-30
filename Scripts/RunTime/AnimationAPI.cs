@@ -1,6 +1,6 @@
 /*
  * Author: Matuyuhi
- * Date: 2023-07-26
+ * Date: 2023-07-26 (Update: 2023-08-30)
  * File: AnimationAPI.cs
  */
 
@@ -281,6 +281,13 @@ namespace AnimationPro.RunTime
             return origin.SlideIn(spec, new Vector3(0f, distance, 0f));
         }
 
+        /// <summary>
+        /// Animates the given object to scale in a specific distance in the specified direction.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="rate">distance value</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the SlideFrom animation movement.</returns>
         public static ContentTransform ScaleIn(
             this IAnimation origin,
             float rate,
@@ -290,9 +297,48 @@ namespace AnimationPro.RunTime
             return origin.ScaleTo(rate, false, spec);
         }
         
+        /// <summary>
+        /// Animates the given object to scale in a specific distance in the specified direction.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="rate">distance value</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the SlideFrom animation movement.</returns>
+        public static ContentTransform ScaleIn(
+            this IAnimation origin,
+            Vector2 rate,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.ScaleTo(rate, false, spec);
+        }
+        
+        /// <summary>
+        /// Animates the given object to scale out a specific distance in the specified direction.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="rate">distance value</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the SlideFrom animation movement.</returns>
         public static ContentTransform ScaleOut(
             this IAnimation origin,
             float rate,
+            [CanBeNull] RateSpec spec= null
+        )
+        {
+            return origin.ScaleTo(rate, true, spec);
+        }
+        
+        /// <summary>
+        /// Animates the given object to scale out a specific distance in the specified direction.
+        /// </summary>
+        /// <param name="origin">The object to animate.</param>
+        /// <param name="rate">distance value</param>
+        /// <param name="spec">Easing function to define animation's pace over time.</param>
+        /// <returns>Returns the SlideFrom animation movement.</returns>
+        public static ContentTransform ScaleOut(
+            this IAnimation origin,
+            Vector2 rate,
             [CanBeNull] RateSpec spec= null
         )
         {

@@ -1,10 +1,9 @@
 /*
  * Author: Matuyuhi
- * Date: 2023-07-26
+ * Date: 2023-07-26 (Update: 2023-08-30)
  * File: AnimationBehaviour.cs
  */
 
-using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -22,8 +21,6 @@ namespace AnimationPro.RunTime
     {
         private AnimationCore core;
         
-        
-        private bool initialized;
 
         public bool IsAnimate => coroutine != null;
 
@@ -35,7 +32,6 @@ namespace AnimationPro.RunTime
         {
             base.Awake();
             core = new AnimationCore(this, this);
-            initialized = false;
         }
 
         public void Animation(ContentTransform a, AnimationListener animationListener = null)
@@ -57,7 +53,6 @@ namespace AnimationPro.RunTime
         public override void OnStart()
         {
             InitializeParam();
-            initialized = true;
             if (listener != null) listener.OnStart?.Invoke();
         }
 
