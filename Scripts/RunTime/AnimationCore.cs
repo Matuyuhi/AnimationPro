@@ -35,7 +35,7 @@ namespace AnimationPro.RunTime
 
             while (time < a.MaxDuration)
             {
-                time += Time.deltaTime;
+                time += Time.unscaledDeltaTime;
                 var update = a.OnUpdate(time);
                 OnUpdate(update);
 
