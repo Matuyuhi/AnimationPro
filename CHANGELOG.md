@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ---
+## [1.1.5]
+### Fixed
+- deltaTime changed to unscaledDeltaTime
+---
 ## [1.1.4]
 ### Added
 - used scale animation is selected Vector2 or float
@@ -212,3 +216,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.1.3]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v1.1.3
 
 [1.1.4]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v1.1.4
+
+[1.1.5]: https://github.com/Matuyuhi/AnimationPro/releases/tag/v1.1.5
